@@ -3,35 +3,54 @@ namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
 class StudentController extends Controller{
-	protected function modify($type){
-		$form = D('student');
-		$data = $form->create();
-		var_dump($data);
-		if($data) {
-			if ($type == Model::MODEL_INSERT)
+	public function insert() {
+		if (IS_POST) {
+			$form = D('student');
+			$data = $form->create();
+			//var_dump($data);
+			if ($data) {
 				$res = $form->add();
-			else 
-				$res = $form->save();
-			if($res) {
-				$this->success($res);
-			}else{
-				$this->error($form->getError());
+				if($res) {
+					$this->success("New record $res#");
+				}else
+					$this->error($form->getError());
 			}
-		}else{
-			$this->error($form->getError());
+			else 
+				$this->error($form->getError());
+		}
+		else {
+			//TODO: show insert page
 		}
 	}
-	public function insert() {
-		$this->modify(Model::MODEL_INSERT);
-	}
 	public function update() {
-		$this->modify(Model::MODEL_UPDATE);
+		//use student_recid to identify students
+		if (IS_POST) {
+		$form = D('student');
+			$data = $form->create();
+			if ($data) {
+				$res = $form->save();
+				if($res) {
+					$this->success("Record updated");
+				}else
+					$this->error($form->getError());
+			}
+			else 
+				$this->error($form->getError());
+		}
+		else {
+			//TODO: show update page
+		}
 	}
 	public function find() {
-		$Form = D('student');
-		$Form->create();
-		$res = $Form->find();
-		var_dump($Form->buildSql());
-		var_dump($res);
+		//Do not contain any empty values
+		//Invalid keys will be ignored
+		if (!IS_GET)
+			$this->error('Invalid method');
+		
+		$form = M('student');
+		$query = $form->create(I('get.'));
+		//var_dump($query);
+		$res = $form->where($query)->select();
+		var_dump($res); // show the result
 	}
 }
