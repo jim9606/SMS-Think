@@ -3,9 +3,9 @@ namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
 class StudentController extends Controller{
-	protected function modify($type){
+	public function insert(){
 		$Form = D('student');
-		$data = $Form->create(I('post.'),$type);
+		$data = $Form->create();
 		var_dump($data);
 		if($data) {
 			if ($type == Model::MODEL_INSERT)
@@ -21,12 +21,6 @@ class StudentController extends Controller{
 		}else{
 			$this->error($Form->getError());
 		}
-	}
-	public function insert(){
-		$this->modify(Model::MODEL_INSERT);
-	}
-	public function update(){
-		$this->modify(Model::MODEL_UPDATE);
 	}
 	public function find() {
 		$Form = D('student');
