@@ -3,24 +3,29 @@ namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
 class StudentController extends Controller{
-	public function insert(){
-		$Form = D('student');
-		$data = $Form->create();
+	protected function modify($type){
+		$form = D('student');
+		$data = $form->create();
 		var_dump($data);
 		if($data) {
 			if ($type == Model::MODEL_INSERT)
-				$result = $Form->add();
-			else
-				$result = $Form->save();
-			var_dump($result);
-			if($result) {
-				$this->success($result);
+				$res = $form->add();
+			else 
+				$res = $form->save();
+			if($res) {
+				$this->success($res);
 			}else{
-				$this->error($Form->getError());
+				$this->error($form->getError());
 			}
 		}else{
-			$this->error($Form->getError());
+			$this->error($form->getError());
 		}
+	}
+	public function insert() {
+		$this->modify(Model::MODEL_INSERT);
+	}
+	public function update() {
+		$this->modify(Model::MODEL_UPDATE);
 	}
 	public function find() {
 		$Form = D('student');
