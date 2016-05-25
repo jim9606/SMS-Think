@@ -3,7 +3,7 @@ namespace Sms\Model;
 use Think\Model;
 class TeacherModel extends Model {
 	protected $insertFields = 'teacher_id,name';
-	protected $updateFields = 'name';
+	protected $updateFields = 'teacher_recid,name';
 	protected $_validate = array(
 		array('teacher_id','5','ID length must be 5',self::EXISTS_VALIDATE,'length'),
 		array('teacher_id','','ID exists',self::EXISTS_VALIDATE,'unique'),

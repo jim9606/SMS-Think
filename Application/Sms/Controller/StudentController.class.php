@@ -1,7 +1,7 @@
 <?php
 namespace Sms\Controller;
 use Think\Controller;
-use Think\Model;
+
 class StudentController extends Controller{
 	public function insert() {
 		if (IS_POST) {
@@ -24,8 +24,9 @@ class StudentController extends Controller{
 	}
 	public function update() {
 		//use student_recid to identify students
+		//If nothing updated, returns error
 		if (IS_POST) {
-		$form = D('student');
+			$form = D('student');
 			$data = $form->create();
 			if ($data) {
 				$res = $form->save();
