@@ -1,0 +1,18 @@
+[ 2016-05-25T22:14:17+08:00 ] ::1 /sms/index.php/Student/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000029s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000535s ]
+ERR: 无法加载模块:Student
+
+[ 2016-05-25T22:14:51+08:00 ] ::1 /SMS/index.php/Student/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000462s ]
+ERR: 无法加载模块:Student
+
+[ 2016-05-25T22:15:12+08:00 ] ::1 /SMS/index.php/Teacher/add
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000031s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000484s ]
+ERR: 无法加载模块:Teacher
+
