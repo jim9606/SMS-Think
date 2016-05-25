@@ -7,7 +7,7 @@ class StudentModel extends Model {
 		array('student_id','','ID exists',self::EXISTS_VALIDATE,'unique'),
 		array('student_id','require','ID expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
 			
-		array('name','1,20','Invalid name length',self::EXISTS_VALIDATE,'length'),
+		array('name','1,20','Invalid name',self::EXISTS_VALIDATE,'length'),
 		array('name','require','Name expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
 			
 		array('gender','0,1','Invalid gender',self::EXISTS_VALIDATE,'in'),
