@@ -25,6 +25,11 @@ class StudentController extends Controller{
 	public function insert(){
 		$this->modify(Model::MODEL_INSERT);
 	}
+	public function edit($student_id=0){
+		$Form=D('student');
+		$this->assign('vo',$Form->find($student_id));
+		$this->display();
+	}
 	public function update(){
 		$this->modify(Model::MODEL_UPDATE);
 	}
