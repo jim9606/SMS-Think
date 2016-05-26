@@ -2,12 +2,14 @@
 namespace Sms\Model;
 use Think\Model;
 class StudentModel extends Model {
+	protected $insertFields = 'student_id,name,entrance_age,entrance_year,class';
+	protected $updateFields = 'student_recid,name,entrance_age,entrance_year,class';
 	protected $_validate = array(
 		array('student_id','10','ID length must be 10',self::EXISTS_VALIDATE,'length'),
+		array('student_id','','ID exists',self::EXISTS_VALIDATE,'unique'),
 		array('student_id','require','ID expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
-		array('student_id','','ID exists',self::MUST_VALIDATE,'unique',self::MODEL_INSERT),
 			
-		array('name','1,20','Invalid name length',self::EXISTS_VALIDATE,'length'),
+		array('name','1,20','Invalid name',self::EXISTS_VALIDATE,'length'),
 		array('name','require','Name expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
 			
 		array('gender','0,1','Invalid gender',self::EXISTS_VALIDATE,'in'),
