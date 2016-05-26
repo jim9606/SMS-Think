@@ -67,3 +67,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+#ThinkPHP cache
+Application/Runtime/
+
+#ThinkPHP default application
+Application/Home/
