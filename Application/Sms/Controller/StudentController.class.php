@@ -1,49 +1,46 @@
 <?php
 namespace Sms\Controller;
 use Think\Controller;
+use Think\Model;
 class StudentController extends Controller{
 	public function insert() {
-		if (IS_POST) {
-			$form = D('student');
-			$data = $form->create();
-			//var_dump($data);
-			if ($data) {
-				$res = $form->add();
-				if($res) {
-					$this->success("New record $res#");
-				}else
-					$this->error($form->getError());
-			}
-			else 
+		if (!IS_POST)
+			$this->error('Invalid method');
+		
+		$form = D('student');
+		$data = $form->create(I('post.'),Model::MODEL_INSERT);
+		if ($data) {
+			$res = $form->add($data);
+			if($res) {
+				$this->success("New record $res#");
+			}else
 				$this->error($form->getError());
-		}
-		else {
-			//TODO: show insert page
-		}
+		}else 
+			$this->error($form->getError());
 	}
 	public function update() {
 		//use student_recid to identify students
 		//If nothing updated, returns error
-		if (IS_POST) {
-			$form = D('student');
-			$data = $form->create();
-			if ($data) {
-				$res = $form->save();
-				if($res) {
-					$this->success("Record updated");
-				}else
-					$this->error($form->getError());
+		if (!IS_POST) 
+			$this->error('Invalid method');
+		
+		$form = D('student');
+		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
+		if ($data) {
+			$res = $form->save($data);
+			var_dump($res);
+			if($res) {
+				$this->success("Record updated");
+			}else
+				//if $res === 0 No update because of no modified values
+				$this->error(($res === 0) ? "Not modified" : $form->getError());
 			}
 			else 
 				$this->error($form->getError());
-		}
-		else {
-			//TODO: show update page
-		}
 	}
-	public function edit($student_id=0){
+	public function edit($student_recid=1){
 		$Form=D('student');
-		$this->assign('vo',$Form->find($student_id));
+		$this->assign('vo',$Form->find($student_recid));
 		$this->display();
 	}
 	public function find() {
@@ -54,7 +51,6 @@ class StudentController extends Controller{
 		
 		$form = M('student');
 		$query = $form->create(I('get.'));
-		//var_dump($query);
 		$res = $form->where($query)->select();
 		var_dump($res); // show the result
 	}
