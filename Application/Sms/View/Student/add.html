@@ -9,7 +9,10 @@
 <table>
 <tr><td>student id</td><td><input type="text" maxlength=20 size=20 name="student_id"></td></tr>
 <tr><td>name</td><td><input type="text" maxlength=20 size=20 name="name"></td></tr>
-<tr><td>gender</td><td><input type="text" maxlength=20 size=20 name="gender"></td></tr>
+			<tr><td>gender</td><td>
+				Male<input type="radio" name="gender" value=0 <if condition="$vo.gender eq 0"> checked="checked" </if> />
+				Female<input type="radio" name="gender" value=1 <if condition="$vo.gender eq 1"> checked="checked" </if> />
+			</td></tr>
 <tr><td>entrance age</td><td><input type="text" maxlength=20 size=20 name="entrance_age"></td></tr>
 <tr><td>entrance year</td><td><input type="text" maxlength=20 size=20 name="entrance_year"></td></tr>
 <tr><td>class</td><td><input type="text" maxlength=20 size=20 name="class"></td></tr>

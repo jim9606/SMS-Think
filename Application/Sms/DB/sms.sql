@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-05-25 17:40:24
+-- Generation Time: 2016-05-29 03:13:19
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `sms`
 --
-CREATE DATABASE IF NOT EXISTS `sms` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `sms`;
 
 -- --------------------------------------------------------
 
@@ -28,7 +26,6 @@ USE `sms`;
 -- 表的结构 `course`
 --
 
-DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
   `course_recid` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` varchar(7) NOT NULL,
@@ -48,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `course` (
 -- 表的结构 `enroll`
 --
 
-DROP TABLE IF EXISTS `enroll`;
 CREATE TABLE IF NOT EXISTS `enroll` (
   `enroll_id` int(11) NOT NULL AUTO_INCREMENT,
   `sutdent_id` varchar(10) NOT NULL,
@@ -67,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `enroll` (
 -- 表的结构 `student`
 --
 
-DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `student_recid` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` varchar(10) NOT NULL,
@@ -78,7 +73,15 @@ CREATE TABLE IF NOT EXISTS `student` (
   `class` varchar(20) NOT NULL,
   PRIMARY KEY (`student_recid`),
   UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `student`
+--
+
+INSERT INTO `student` (`student_recid`, `student_id`, `name`, `gender`, `entrance_age`, `entrance_year`, `class`) VALUES
+(5, '1430540160', '李狗嗨', 0, 15, 2012, 'A'),
+(6, '1430540269', '小红', 1, 12, 2014, 'B');
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,6 @@ CREATE TABLE IF NOT EXISTS `student` (
 -- 表的结构 `teacher`
 --
 
-DROP TABLE IF EXISTS `teacher`;
 CREATE TABLE IF NOT EXISTS `teacher` (
   `teacher_recid` int(11) NOT NULL AUTO_INCREMENT,
   `teacher_id` varchar(5) NOT NULL,
@@ -101,13 +103,13 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 -- 表的结构 `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rec_id` int(11) NOT NULL AUTO_INCREMENT,
+  `identity` int(1) NOT NULL DEFAULT '0',
   `user` varchar(10) NOT NULL,
   `password` varchar(30) NOT NULL,
   `group_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`rec_id`),
   UNIQUE KEY `user` (`user`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 

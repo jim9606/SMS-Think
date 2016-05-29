@@ -36,9 +36,9 @@ public function insert() {
 			else 
 				$this->error($form->getError());
 	}
-	public function edit($teacher_id=0){
+	public function edit($teacher_recid=1){
 		$Form=D('teacher');
-		$this->assign('vo',$Form->find($teacher_id));
+		$this->assign('vo',$Form->find($teacher_recid));
 		$this->display();
 	}
 	public function find() {

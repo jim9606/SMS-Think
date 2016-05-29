@@ -43,9 +43,9 @@ public function insert() {
 			//TODO: show update page
 		}
 	}
-	public function edit($teacher_id=0){
+	public function edit($course_recid=1){
 		$Form=D('course');
-		$this->assign('vo',$Form->find($teacher_id));
+		$this->assign('vo',$Form->find($course_recid));
 		$this->display();
 	}
 	public function find() {
