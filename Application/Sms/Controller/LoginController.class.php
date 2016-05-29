@@ -32,7 +32,7 @@ class LoginController extends Controller{
 				$this->error("Wrong user or password");
 			}
 			else{
-				$this->success("Login successfully");
+				//$this->success("Login successfully");
 				$identity=$result['identity'];
 				switch($identity){
 					case 0:
@@ -41,6 +41,8 @@ class LoginController extends Controller{
 						teacherLogin();break;
 					case 2:
 						administorLogin();break;
+					default:
+						$this->error("data error");break;
 				}
 			}
 		}
@@ -51,6 +53,23 @@ class LoginController extends Controller{
 		$this->display();
 	}
 	public function addNewUser(){
-		
+		if(!IS_POST){
+			$this->error('Invalid values');
+		}
+		$psd=I('post.password');
+		$psd_a=I('post.password_again');
+		if($psd!=$psd_a){
+			$this->error('The two times password are different');
+		}
+		$identity=I('post.identity');
+		switch($identity){
+			case 0:
+				
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+		}
 	}
 }
