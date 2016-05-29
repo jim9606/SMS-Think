@@ -46,6 +46,11 @@ class LoginController extends Controller{
 		}
 	}
 	public function setup($user,$psd){
+		$this->assign('user',$user);
+		$this->assign('password',$psd);
+		$this->display();
+	}
+	public function addNewUser(){
 		
 	}
 }
