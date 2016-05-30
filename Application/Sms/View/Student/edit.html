@@ -8,7 +8,7 @@
 	<form method="post" action="__URL__/update">
 		<input type="hidden" name="student_recid" value="{$vo.student_recid}" />
 		<table>
-			<tr><td>student id</td><td>{$vo.student_id}<
+			<tr><td>student id</td><td>{$vo.student_id}</td></tr>
 			<tr><td>name</td><td><input type="text" value="{$vo.name}" maxlength=20 size=20 name="name" /></td></tr>
 			<tr><td>gender</td><td>
 				Male<input type="radio" name="gender" value=0 <if condition="$vo.gender eq 0"> checked="checked" </if> />

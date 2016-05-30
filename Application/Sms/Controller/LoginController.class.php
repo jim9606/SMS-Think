@@ -9,7 +9,7 @@ class LoginController extends Controller{
 		}
 		$select=I('post.select');
 		if($select==0){
-			$form=D('user');//TODO,need to write the model of user table
+			$form=D('user');//TODO,need to wrizte the model of user table
 			$user=I('post.user');
 			$psd=I('post.password');
 			$result=$form->where("user=$user")->select();
@@ -24,7 +24,9 @@ class LoginController extends Controller{
 			$form=D('user');//TODO,need to write the model of user table
 			$user=I('post.user');
 			$psd=I('post.password');
-			$result=$form->where("user=$user AND password=$psd")->select();
+			$cond['user'] = I('post.user');
+			$cond['password'] = I('post.password');
+			$result=$form->where($cond)->count();
 			if($result==false){
 				$this->error("Program error");
 			}

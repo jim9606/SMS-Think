@@ -6,7 +6,7 @@ public function insert() {
 		if (!IS_POST)
 			$this->error('Invalid method');
 		
-		$form = D('teacher');
+		$form = D('Teacher');
 		$data = $form->create(I('post.'),Model::MODEL_INSERT);
 		if ($data) {
 			$res = $form->add($data);
@@ -22,7 +22,7 @@ public function insert() {
 		if (!IS_POST) 
 			$this->error('Invalid method');
 		
-		$form = D('teacher');
+		$form = D('Teacher');
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
 		if ($data) {
 			$res = $form->save($data);
@@ -37,7 +37,7 @@ public function insert() {
 				$this->error($form->getError());
 	}
 	public function edit($teacher_recid=1){
-		$Form=D('teacher');
+		$Form=D('Teacher');
 		$this->assign('vo',$Form->find($teacher_recid));
 		$this->display();
 	}
@@ -47,9 +47,8 @@ public function insert() {
 		if (!IS_GET)
 			$this->error('Invalid method');
 		
-		$form = M('teacher');
+		$form = M('Teacher');
 		$query = $form->create(I('get.'));
-		//var_dump($query);
 		$res = $form->where($query)->select();
 		var_dump($res); // show the result
 	}

@@ -7,7 +7,7 @@ class StudentController extends Controller{
 		if (!IS_POST)
 			$this->error('Invalid method');
 		
-		$form = D('student');
+		$form = D('Student');
 		$data = $form->create(I('post.'),Model::MODEL_INSERT);
 		if ($data) {
 			$res = $form->add($data);
@@ -24,7 +24,7 @@ class StudentController extends Controller{
 		if (!IS_POST) 
 			$this->error('Invalid method');
 		
-		$form = D('student');
+		$form = D('Student');
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
 		if ($data) {
 			$res = $form->save($data);
@@ -39,7 +39,7 @@ class StudentController extends Controller{
 				$this->error($form->getError());
 	}
 	public function edit($student_recid=1){
-		$Form=D('student');
+		$Form=D('Student');
 		$this->assign('vo',$Form->find($student_recid));
 		$this->display();
 	}
@@ -49,7 +49,7 @@ class StudentController extends Controller{
 		if (!IS_GET)
 			$this->error('Invalid method');
 		
-		$form = M('student');
+		$form = M('Student');
 		$query = $form->create(I('get.'));
 		$res = $form->where($query)->select();
 		var_dump($res); // show the result
