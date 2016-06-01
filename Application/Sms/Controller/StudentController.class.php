@@ -4,8 +4,8 @@ use Think\Controller;
 use Think\Model;
 class StudentController extends Controller{
 	public function insert() {
-		if (!IS_POST)
-			$this->error('Invalid method');
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$form = D('Student');
 		$data = $form->create(I('post.'),Model::MODEL_INSERT);
@@ -21,9 +21,9 @@ class StudentController extends Controller{
 	public function update() {
 		//use student_recid to identify students
 		//If nothing updated, returns error
-		if (!IS_POST) 
-			$this->error('Invalid method');
-		
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+
 		$form = D('Student');
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
 		if ($data) {
@@ -39,6 +39,8 @@ class StudentController extends Controller{
 				$this->error($form->getError());
 	}
 	public function edit($student_recid=1){
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		
 		$Form=D('Student');
 		$this->assign('vo',$Form->find($student_recid));
 		$this->display();
@@ -46,9 +48,9 @@ class StudentController extends Controller{
 	public function find() {
 		//Do not contain any empty values
 		//Invalid keys will be ignored
-		if (!IS_GET)
-			$this->error('Invalid method');
-		
+		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+			
 		$form = M('Student');
 		$query = $form->create(I('get.'));
 		$res = $form->where($query)->select();

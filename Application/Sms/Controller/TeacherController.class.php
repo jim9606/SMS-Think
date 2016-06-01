@@ -3,8 +3,8 @@ namespace Sms\Controller;
 use Think\Controller;
 class TeacherController extends Controller{
 public function insert() {
-		if (!IS_POST)
-			$this->error('Invalid method');
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$form = D('Teacher');
 		$data = $form->create(I('post.'),Model::MODEL_INSERT);
@@ -19,8 +19,8 @@ public function insert() {
 	}
 	public function update() {
 		//use teacher_recid to identify students
-		if (!IS_POST) 
-			$this->error('Invalid method');
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$form = D('Teacher');
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
@@ -37,6 +37,8 @@ public function insert() {
 				$this->error($form->getError());
 	}
 	public function edit($teacher_recid=1){
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		
 		$Form=D('Teacher');
 		$this->assign('vo',$Form->find($teacher_recid));
 		$this->display();
@@ -44,8 +46,8 @@ public function insert() {
 	public function find() {
 		//Do not contain any empty values
 		//Invalid keys will be ignored
-		if (!IS_GET)
-			$this->error('Invalid method');
+		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$form = M('Teacher');
 		$query = $form->create(I('get.'));

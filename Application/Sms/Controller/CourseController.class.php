@@ -4,8 +4,8 @@ use Think\Controller;
 use Think\Model;
 class CourseController extends Controller{
 	public function insert() {
-		if (!IS_POST)
-			$this->error('Invalid method');
+			IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+			!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 	
 			$form = D('Course');
 			$data = $form->create(I('post.'),Model::MODEL_INSERT);
@@ -21,8 +21,8 @@ class CourseController extends Controller{
 	public function update() {
 		//use student_recid to identify students
 		//If nothing updated, returns error
-		if (!IS_POST)
-			$this->error('Invalid method');
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 	
 			$form = D('Course');
 			$data = $form->create(I('post.'),Model::MODEL_UPDATE);
@@ -39,15 +39,19 @@ class CourseController extends Controller{
 				$this->error($form->getError());
 	}
 	public function edit($course_recid=1){
-		$Form=D('Course');
-		$this->assign('vo',$Form->find($course_recid));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		
+		$form=D('Course');
+		$this->assign('vo',$form->find($course_recid));
+		$form = new Model();
+		$this->assign('teacher_list',$form->table('teacher')->field('teacher_id,name')->select());
 		$this->display();
 	}
 	public function find() {
 		//Do not contain any empty values
 		//Invalid keys will be ignored
-		if (!IS_GET)
-			$this->error('Invalid method');
+		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$form = M('Course');
 		$query = $form->create(I('get.'));

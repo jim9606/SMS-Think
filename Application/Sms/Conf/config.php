@@ -1,6 +1,7 @@
 <?php
 return array(
 	//'配置项'=>'配置值'
+	
 	'DB_TYPE'=>'mysql',// 数据库类型
 	'DB_HOST'=>'127.0.0.1',// 服务器地址
 	'DB_NAME'=>'sms',// 数据库名
@@ -16,5 +17,10 @@ return array(
 			'admin'  =>array('read'=>1,'admin'=>1,'score'=>0),
 			'teacher'=>array('read'=>1,'admin'=>0,'score'=>1),
 			'student'=>array('read'=>1,'admin'=>0,'score'=>0),
-	)
+	),
+		
+	'PERMISSION_CONTROL'=>false, //True for release,check permissions for API
+	
+	'MSG_API_PERMISSION_DENIED'=>'Forbidden',
+	'MSG_API_INVALID_METHOD'=>'Invalid method'
 );
