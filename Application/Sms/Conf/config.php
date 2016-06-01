@@ -9,5 +9,12 @@ return array(
 	'DB_PORT'=>3306,// 端口
 	'DB_PREFIX'=>'',// 数据库表前缀
 	'DB_CHARSET'=>'utf8',// 数据库字符集
-	'USER_DEFAULT_PWD'=>'123456' //新建用户默认密码
+	
+	'USER_DEFAULT_PASSWORD'=>'123456',
+	'USER_PERMISSIONS'=> array(
+			'anon'   =>array('read'=>0,'admin'=>0,'score'=>0),
+			'admin'  =>array('read'=>1,'admin'=>1,'score'=>0),
+			'teacher'=>array('read'=>1,'admin'=>0,'score'=>1),
+			'student'=>array('read'=>1,'admin'=>0,'score'=>0),
+	)
 );
