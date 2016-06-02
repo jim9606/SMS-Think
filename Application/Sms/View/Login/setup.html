@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Set up a new account</title>
+</head>
+<body>
+<form method="post" action="__URL__/addNewUser">
+<table>
+<tr><td>user</td><td><input type="text" maxlength=20 size=20 name="user" value="{$user}"></td></tr>
+<tr><td>password</td><td><input type="password" maxlength=20 size=20 name="password" value="{$password}"></td></tr>
+<tr><td>password again</td><td><input type="password" maxlength=20 size=20 name="password_again"></td></tr>
+<tr><td>identity</td>
+<td>
+Student<input type="radio" name="identity" value=0 checked="checked">
+Teacher<input type="radio" name="identity" value=1>
+Administor<input type="radio" name="identity" value=2></td></tr>
+<tr><td>group id</td><td><input type="text" maxlength=20 size=20 name="group_id"></td></tr>
+<tr><td><input type="submit" value="ok"></td></tr>
+</table>
+</form>
+</body>
+</html>
