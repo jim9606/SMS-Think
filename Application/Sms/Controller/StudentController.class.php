@@ -45,15 +45,27 @@ class StudentController extends Controller{
 		$this->assign('vo',$Form->find($student_recid));
 		$this->display();
 	}
-	public function find() {
+	public function find($id) {
 		//Do not contain any empty values
 		//Invalid keys will be ignored
 		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
 		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-			
-		$form = M('Student');
-		$query = $form->create(I('get.'));
-		$res = $form->where($query)->select();
-		var_dump($res); // show the result
+		$form = new Model();
+		$inform=$form->tale('student')->getByStudent_id($id);
+		$this->show(
+				'id:'.$inform['student_id'].
+				'<br/>name:'.$inform['name'].
+				'<br/>gender:'.$inform['gender'].
+				'<br/>entrance age:'.$inform['entrance_age']
+				.'<br/>entrance year:'.$inform['entrance_year']
+				.'<br/>class:'.$inform['class']
+				);
+		$enrolls=$form->table('enroll')->getByStudent_id($id);
+		$this->show('<br/>Courses:');
+		foreach ($enroll as $enrolls){
+			$course_id=$enroll['course_id'];
+			$course=$form->table('course')->getByCourse_id($course_id);
+			$this->show('<br/>'.$course['name']);
+		}
 	}
 }

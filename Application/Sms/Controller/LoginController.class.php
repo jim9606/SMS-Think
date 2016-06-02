@@ -11,6 +11,8 @@ class LoginController extends Controller{
 		if ($res) {
 			switch (session('type')) {
 				case 'student':
+					$student=A('Student');
+					$student->find(I('post.user'));
 					break;
 				case 'teacher':
 					break;
