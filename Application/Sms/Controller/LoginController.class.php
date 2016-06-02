@@ -4,8 +4,7 @@ use Think\Controller;
 
 class LoginController extends Controller{
 	public function auth() {
-		if (!IS_POST)
-			$this->error(C('MSG_API_INVALID_METHOD'));
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
 		
 		$res = authUser(I('post.user'),I('post.password'));
 		if ($res) {
@@ -27,6 +26,8 @@ class LoginController extends Controller{
 	}
 	public function logout() {
 		session(null);
+		//TODO: jump to login page
 		$this->success('You have logged out');
 	}
+	
 }

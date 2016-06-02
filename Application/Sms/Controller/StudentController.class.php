@@ -38,34 +38,31 @@ class StudentController extends Controller{
 			else 
 				$this->error($form->getError());
 	}
-	public function edit($student_recid=1){
+	public function delete($student_id) {
+		//TODO: delete a student
+	}
+	public function add() {
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$this->show();
+	}
+	public function edit($student_recid){
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$Form=D('Student');
 		$this->assign('vo',$Form->find($student_recid));
 		$this->display();
 	}
-	public function find($id) {
+	public function find() {
 		//Do not contain any empty values
 		//Invalid keys will be ignored
 		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
 		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-		$form = new Model();
-		$inform=$form->tale('student')->getByStudent_id($id);
-		$this->show(
-				'id:'.$inform['student_id'].
-				'<br/>name:'.$inform['name'].
-				'<br/>gender:'.$inform['gender'].
-				'<br/>entrance age:'.$inform['entrance_age']
-				.'<br/>entrance year:'.$inform['entrance_year']
-				.'<br/>class:'.$inform['class']
-				);
-		$enrolls=$form->table('enroll')->getByStudent_id($id);
-		$this->show('<br/>Courses:');
-		foreach ($enroll as $enrolls){
-			$course_id=$enroll['course_id'];
-			$course=$form->table('course')->getByCourse_id($course_id);
-			$this->show('<br/>'.$course['name']);
-		}
+			
+		$form = M('Student');
+		$query = $form->create(I('get.'));
+		$res = $form->where($query)->order('student_id asc')->select();
+		
+		$this->assign('list',$res);
+		$this->show();
 	}
 }

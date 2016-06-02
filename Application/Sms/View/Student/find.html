@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Find student</title>
+<script>
+function edit(student_recid) {
+	console.log(student_recid);
+	window.location.assign("__URL__/edit?sutdent_recid=" + student_recid);
+}
+function show_courses(student_id) {
+	//TODO: Jump to show courses
+}
+function del(student_recid) {
+	//TODO: Delete a student. It may use AJAX
+}
+</script>
+</head>
+<body>
+<table border="1">
+	<tr>
+	<th>#</th><th>ID</th><th>Name</th><th>Gender</th>
+	<th>Entrance Year</th><th>Entrance Age</th><th>Class</th>
+	<th>Action</th>
+	</tr>
+	<volist name="list" id="vo" empty="Nothing found">
+	<tr>
+	<td>{$i}</td><td>{$vo.student_id}</td><td>{$vo.name}</td><td><if condition="$vo.gender eq 0">M<else/>F</if></td>
+	<td>{$vo.entrance_year}</td><td>{$vo.entrance_age}</td><td>{$vo.class}</td>
+	<td>
+	<eq name="$Think.session.permissions.admin" value="1"><button onclick="edit({$vo.student_recid})">Edit</button></eq>
+	<eq name="$Think.session.permissions.read" value="1"><button onclick="show_cousrces({$vo.student_id})">Courses</button></eq>
+	<eq name="$Think.session.permissions.admin" value="1"><button onclick="del({$vo.student_recid})">Delete</button></eq>
+	</td>
+	</tr>
+	</volist>
+</table>
+</body>
+</html>
