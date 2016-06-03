@@ -51,11 +51,10 @@ class CourseController extends Controller{
 		//Do not contain any empty values
 		//Invalid keys will be ignored
 		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
-		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
 		$form = M('Course');
 		$query = $form->create(I('get.'));
 		$res = $form->where($query)->select();
-		var_dump($res); // show the result
 	}
 }

@@ -65,4 +65,10 @@ class StudentController extends Controller{
 		$this->assign('list',$res);
 		$this->show();
 	}
+	public function auth($user){
+		$form=M('user');
+		$res=$form->where($user)->select();
+		$this->assign('res',$res);
+		$this->display();
+	}
 }
