@@ -9,8 +9,8 @@ function edit(teacher_recid) {
 	window.location.assign("__URL__/edit?teacher_recid=" + teacher_recid);
 }
 function show_courses(teacher_id) {
-	window.location.assign("__APP__/Course/find?teacher_recid=" + teacher_recid);
 	//TODO: Jump to show courses
+	window.location.assign("__APP__/Course/find?teacher_id=" + teacher_id);
 }
 function del(teacher_recid) {	
 	//TODO: Delete a student. It may use AJAX

@@ -10,21 +10,15 @@ class LoginController extends Controller{
 		if ($res) {
 			switch (session('type')) {
 				case 'student':
-					$form=A('Student');
-					$form->auth(I('post.'));
-					break;
-				case 'teacher':
-					$form=A('Teacher');
-					$form->auth(I('post.'));
-					break;
+				case 'teacher':					
 				case 'admin':
-					//TODO
 					break;
 				default:	//Should never happens
 					$this->error('Unknown user type');
 					break;
 			}
-			
+			$user=A('User');
+			$user->utility(I('post.'));
 		}
 		else
 			$this->error($res);

@@ -1,32 +1,26 @@
 <?php
 namespace Sms\Controller;
 use Think\Controller;
-
+use Think\Model;
 class LoginController extends Controller{
-	public function edit(){
-		$form = M('user');
-		$query = $form->create(I('get.'));
-		$user=$form->where($query)->select();
-		$this->assign('vo',$user);
+	public function passwd(){
+		if(IS_GET)
+		{
+			$this->assign('user',session('user'));
+			$this->display();
+		}
+		else if(IS_POST)
+		{
+			$form = new Model();
+			$res = $form->table('user')->where(array('user'=>session('user')))->save(array('password',I('post.password')));
+			if($res) $this->success("Record updated");
+			else $this->error(($res === 0) ? "Not modified" : $form->getError());
+		}
+	}
+	public function utility($user){
+		$form=new Model();
+		$res=$form->table('user')->where($user)->select();
+		$this->assign('res',$res);
 		$this->display();
 	}
-	public function update() {
-		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
-		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-	
-		$form = D('user');
-		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
-		if ($data) {
-			$res = $form->save($data);
-			var_dump($res);
-			if($res) {
-				$this->success("Record updated");
-			}else
-				//if $res === 0 No update because of no modified values
-				$this->error(($res === 0) ? "Not modified" : $form->getError());
-		}
-		else
-			$this->error($form->getError());
-	}
-	
 }

@@ -53,12 +53,6 @@ public function insert() {
 		$query = $form->create(I('get.'));
 		$res = $form->where($query)->select();
 		$this->assign('list',$res);
-		$this->show();// show the result
-	}
-	public function auth($user){
-		$form=M('user');
-		$res=$form->where($user)->select();
-		$this->assign('res',$res);
-		$this->display();
+		$this->display();// show the result
 	}
 }

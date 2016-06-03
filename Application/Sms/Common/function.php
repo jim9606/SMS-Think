@@ -35,5 +35,6 @@ function authUser($user,$pwd) {
 	}
 	session('type',$res['type']);
 	session('permissions',C('USER_PERMISSIONS')[$res['type']]);
+	session('user',$user);
 	return true;
 }

@@ -60,15 +60,10 @@ class StudentController extends Controller{
 			
 		$form = M('Student');
 		$query = $form->create(I('get.'));
-		$res = $form->where($query)->order('student_id asc')->select();
-		
+		//!(session('type') === 'student') or $query['student_id']=session('user');
+		$res = $form->where($query)->order('student_id asc')->select();		
 		$this->assign('list',$res);
 		$this->show();
 	}
-	public function auth($user){
-		$form=M('user');
-		$res=$form->where($user)->select();
-		$this->assign('res',$res);
-		$this->display();
-	}
+
 }
