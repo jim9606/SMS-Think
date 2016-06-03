@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enroll</title>
+</head>
+<body>
+<form method="post" action="__URL__/enroll">
+<input type="hidden" name="course_id" value="{$course.course_id}">
+<input type="hidden" name="allowed_grade" value="{$course.allowed_grade}">
+<input type="hidden" name="cancel_grade" value="{$course.cancel_grade}">
+<table>
+<tr><th>Course:</th><td>{$course.name}</td></tr>
+<tr><th>Enroll year:</th><td><input type="text" name="enroll_year"></td></tr>
+<tr><td><input type="submit" value="enroll"></td></tr>
+</table>
+</form>
+
+</body>
+</html>

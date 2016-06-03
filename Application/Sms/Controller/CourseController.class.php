@@ -73,4 +73,40 @@ class CourseController extends Controller{
 			//TODO
 		}
 	}
+	public function enroll(){
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		if(IS_GET){
+			if(session('type')=="student"){
+				$form=new Model();
+				$query['course_id']=I('get.');
+				$course=$form->table('course')->where($query)->find();
+				$this->assign('course',$course);
+				$this->display();
+			}
+			else $this->error("You are not student!");
+		}
+		else if(IS_POST){
+			$form=D('Student');
+			$query['student_id']=session('user');
+			$student=$form->where($query)->find();
+			$grade=date('Y')-$student['entrance_year'];
+			if(I('post.allowed_grade')<=$grade&&I('post.cancel_grade')>$grade){
+				$query['course_id']=I('post.course_id');
+				$query['enroll_year']=I('post.enroll_year');
+				$enroll=M('enroll');
+				$data=$enroll->create($query);
+				if($data){
+					$res=$enroll->add($res);
+					if($res) {
+						$this->success("New record $res#");
+					}
+					else
+						$this->error($form->getError());
+					}
+					else
+						$this->error($form->getError());				
+			}
+			else $this->error("Your grade is not allowed to enroll this course.");
+		}
+	}
 }
