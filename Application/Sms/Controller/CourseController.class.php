@@ -53,8 +53,37 @@ class CourseController extends Controller{
 		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
 		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		
-		$form = M('Course');
-		$query = $form->create(I('get.'));
-		$res = $form->where($query)->select();
+		switch(session('type'))
+		{
+			case 'teacher':
+				$form=M('course');
+				$query=$form->create(I('get.'));
+				$course=$form->where($query)->select();
+				$form2=M('enroll');
+				foreach ($row as $course){
+					
+				}
+				break;
+			case 'student':
+				$form = M('enroll');
+				$query = $form->create(I('get.'));
+				$res = $form->where($query)->select();
+				$form2=M('course');
+				foreach ($row as $res){
+					$query=$form2->create($row['course_id']);
+					$ary=$form->where($query)->find();
+					$ary['grades']=$res['grades'];
+					$course[]=$ary;
+				}
+				$this->assign('course',$course);
+				break;
+			case 'admin':
+				break;
+			default:
+				break;
+		}
+		$this->display();
+
+		
 	}
 }

@@ -8,13 +8,13 @@ function edit(teacher_recid) {
 	//console.log(student_recid);
 	window.location.assign("__URL__/edit?teacher_recid=" + teacher_recid);
 }
-function show_courses(student_id) {
-	window.location.assign("__APP__/Course/find?sutdent_recid=" + student_recid);
+function show_courses(teacher_id) {
+	window.location.assign("__APP__/Course/find?teacher_recid=" + teacher_recid);
 	//TODO: Jump to show courses
 }
-function del(student_recid) {	
+function del(teacher_recid) {	
 	//TODO: Delete a student. It may use AJAX
-	window.location.assign("__URL__/delete?sutdent_recid=" + student_recid);
+	window.location.assign("__URL__/delete?teacher_recid=" + teacher_recid);
 }
 </script>
 </head>
