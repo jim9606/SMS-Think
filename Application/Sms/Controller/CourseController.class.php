@@ -58,5 +58,19 @@ class CourseController extends Controller{
 		$res = $form->where($query)->select();		
 		$this->assign('list',$res);
 		$this->display();
-	}				
+	}
+	public function score(){
+		!C('PERMISSION_CONTROL') or session('permissions')['score'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		//use course_id to find the course
+		if(IS_GET){
+			$form=new Model();
+			$query['course_id']=I('get.course_id');
+			$res = $form->table('enroll')->where($query)->select();
+			$this->assign('list',$res);
+			$this->display();
+		}
+		else if(IS_POST){
+			//TODO
+		}
+	}
 }

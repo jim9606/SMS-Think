@@ -16,6 +16,9 @@ function del(course_recid) {
 	//TODO: Delete a student. It may use AJAX
 	window.location.assign("__URL__/delete?course_recid=" + course_recid);
 }
+function score(course_id){
+	window.location.assign("__URL__/score?course_id=" + course_id);
+}
 </script>
 </head>
 <body>
@@ -31,6 +34,7 @@ function del(course_recid) {
 	<eq name="$Think.session.permissions.admin" value="1"><button onclick="edit({$vo.course_recid})">Edit</button></eq>
 	<eq name="$Think.session.permissions.read" value="1"><button onclick="show_cousrces({$vo.course_id})">Enroll</button></eq>
 	<eq name="$Think.session.permissions.admin" value="1"><button onclick="del({$vo.course_recid})">Delete</button></eq>
+	<eq name="$Think.session.permissions.score" value="1"><button onclick="score({$vo.course_id})">Score</button></eq>
 	</td>
 	</tr>
 	</volist>
