@@ -87,14 +87,14 @@ class CourseController extends Controller{
 		}
 		else if(IS_POST){
 			$form=D('Student');
-			$query['student_id']=session('user');
+			$query['student_id']=I('post.student_id');
 			$student=$form->where($query)->find();
 			$grade=date('Y')-$student['entrance_year'];
 			if(I('post.allowed_grade')<=$grade&&I('post.cancel_grade')>$grade){
 				$query['course_id']=I('post.course_id');
 				$query['enroll_year']=I('post.enroll_year');
-				$enroll=M('enroll');
-				$data=$enroll->create($query);
+				$enroll=M('enroll');//may change to the D method and add the model
+				$data = $enroll->create(I('post.'),Model::MODEL_INSERT);
 				if($data){
 					$res=$enroll->add($res);
 					if($res) {
