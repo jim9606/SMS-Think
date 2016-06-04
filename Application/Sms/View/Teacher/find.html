@@ -27,9 +27,9 @@ function del(teacher_recid) {
 	<tr>
 	<td>{$i}</td><td>{$vo.teacher_id}</td><td>{$vo.name}</td>
 	<td>
-	<eq name="$Think.session.permissions.admin" value="1"><button onclick="edit({$vo.teacher_recid})">Edit</button></eq>
-	<eq name="$Think.session.permissions.read" value="1"><button onclick="show_cousrces({$vo.teacher_id})">Courses</button></eq>
-	<eq name="$Think.session.permissions.admin" value="1"><button onclick="del({$vo.teacher_recid})">Delete</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick="edit({$vo.teacher_recid})">Edit</button></eq>
+	<eq name="Think.session.permissions.read" value="1"><button onclick="show_cousrces({$vo.teacher_id})">Courses</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick="del({$vo.teacher_recid})">Delete</button></eq>
 	</td>
 	</tr>
 	</volist>

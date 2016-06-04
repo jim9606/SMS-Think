@@ -9,7 +9,7 @@ class LoginController extends Controller{
 		if ($res) {
 			$form=A('User');
 			$res=$form->utility(session('user'));
-			if($utility){
+			if($res){
 				$this->assign('res',$res);
 				$this->display();
 			}

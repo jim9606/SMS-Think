@@ -31,13 +31,13 @@ function add_student() {
 <table>
 	<tr><th>ID</th><th>Type</th><th>User</th><th>Action</th></tr>
 	<tr><td>{$res.id}</td><td>{$res.type}</td><td>{$res.user}</td></tr>	
-	<tr><td><eq name="$Think.session.permissions.read" value="1"><button onclick="check_student()">Check Student</button></eq></td></tr>
-	<tr><td><eq name="$Think.session.permissions.read" value="1"><button onclick="check_teacher()">Check Teacher</button></eq></td></tr>
-	<tr><td><eq name="$Think.session.permissions.read" value="1"><button onclick="check_course()">Check Course</button></eq></td></tr>	
-	<tr><td><eq name="$Think.session.permissions.read" value="1"><button onclick="passwd()">Change password</button></eq></td></tr>
-	<tr><td><eq name="$Think.session.permissions.admin" value="1"><button onclick="add_student()">Add Student</button></eq></td></tr>
-	<tr><td><eq name="$Think.session.permissions.admin" value="1"><button onclick="add_teacherd()">Add Teacher</button></eq></td></tr>
-	<tr><td><eq name="$Think.session.permissions.admin" value="1"><button onclick="add_course()">Add Course</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="check_student()">Check Student</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="check_teacher()">Check Teacher</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="check_course()">Check Course</button></eq></td></tr>	
+	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="passwd()">Change password</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_student()">Add Student</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_teacherd()">Add Teacher</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_course()">Add Course</button></eq></td></tr>
 </table>
 </body>
 </html>

@@ -20,7 +20,7 @@ class UserController extends Controller{
 	public function utility($user){
 		$form=new Model();
 		$query['user']=$user;
-		$res=$form->table('user')->where($query)->select();
+		$res=$form->table('user')->getByUser($user);
 		return $res;
 	}
 }

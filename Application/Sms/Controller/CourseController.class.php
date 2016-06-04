@@ -74,12 +74,11 @@ class CourseController extends Controller{
 		}
 	}
 	public function enroll(){
-		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		if(IS_GET){
 			if(session('type')=="student"){
 				$form=new Model();
-				$query['course_id']=I('get.');
-				$course=$form->table('course')->where($query)->find();
+				$course=$form->table('course')->getByCourse_id(I('get.course_id'));
 				$this->assign('course',$course);
 				$this->display();
 			}
