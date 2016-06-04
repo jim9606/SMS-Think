@@ -4,21 +4,18 @@ use Think\Controller;
 
 class LoginController extends Controller{
 	public function auth() {
-		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
-		
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));		
 		$res = authUser(I('post.user'),I('post.password'));
 		if ($res) {
-			switch (session('type')) {
-				case 'student':
-				case 'teacher':					
-				case 'admin':
-					break;
-				default:	//Should never happens
-					$this->error('Unknown user type');
-					break;
+			$form=A('User');
+			$res=$form->utility(session('user'));
+			if($utility){
+				$this->assign('res',$res);
+				$this->display();
 			}
-			$user=A('User');
-			$user->utility(I('post.'));
+			else{
+				$this->error("No return data.");
+			}
 		}
 		else
 			$this->error($res);
@@ -27,6 +24,9 @@ class LoginController extends Controller{
 		session(null);
 		//TODO: jump to login page
 		$this->success('You have logged out');
+	}
+	public function test(){
+		echo hello;
 	}
 	
 }

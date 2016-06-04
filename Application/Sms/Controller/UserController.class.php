@@ -2,7 +2,7 @@
 namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
-class LoginController extends Controller{
+class UserController extends Controller{
 	public function passwd(){
 		if(IS_GET)
 		{
@@ -19,8 +19,8 @@ class LoginController extends Controller{
 	}
 	public function utility($user){
 		$form=new Model();
-		$res=$form->table('user')->where($user)->select();
-		$this->assign('res',$res);
-		$this->display();
+		$query['user']=$user;
+		$res=$form->table('user')->where($query)->select();
+		return $res;
 	}
 }
