@@ -9,7 +9,7 @@
 <table>
 <tr><th>#</th><th>Student id</th><th>Score</th></tr>
 <volist name="list" id="vo" empty="Nothing found">
-<tr><td>{$i}</td><td>{$vo.student_id}</td><td><input type="text" name="score" value="{$vo.grade}"></td></tr>
+<tr><td>{$i}</td><td>{$vo.student_id}</td><td><input type="text" name="score[{$vo.enroll_id}]" value="{$vo.grade}"></td></tr>
 </volist>
 </table>
 </form>
