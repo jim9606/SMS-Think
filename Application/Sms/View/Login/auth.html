@@ -6,25 +6,28 @@
 </head>
 <script>
 function passwd() {
-	window.location.assign("__APP__/User/passwd");
+	window.location.assign("__MODULE__/User/passwd");
 }
 function check_student() {
-	window.location.assign("__APP__/Student/find");
+	window.location.assign("__MODULE__/Student/find");
 }
 function check_teacher() {
-	window.location.assign("__APP__/Teacher/find");
+	window.location.assign("__MODULE__/Teacher/find");
 }
 function check_course() {
-	window.location.assign("__APP__/Course/find");
+	window.location.assign("__MODULE__/Course/find");
 }
 function add_course() {
-	window.location.assign("__APP__/Course/add");
+	window.location.assign("__MODULE__/Course/add");
 }
 function add_teacher() {
-	window.location.assign("__APP__/Teacher/add");
+	window.location.assign("__MODULE__/Teacher/add");
 }
 function add_student() {
-	window.location.assign("__APP__/Student/add");
+	window.location.assign("__MODULE__/Student/add");
+}
+function test() {
+	window.location.assign("__URL__/test");
 }
 </script>
 <body>
@@ -36,7 +39,7 @@ function add_student() {
 	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="check_course()">Check Course</button></eq></td></tr>	
 	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="passwd()">Change password</button></eq></td></tr>
 	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_student()">Add Student</button></eq></td></tr>
-	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_teacherd()">Add Teacher</button></eq></td></tr>
+	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_teacher()">Add Teacher</button></eq></td></tr>
 	<tr><td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_course()">Add Course</button></eq></td></tr>
 </table>
 </body>

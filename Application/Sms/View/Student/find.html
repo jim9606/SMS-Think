@@ -10,6 +10,7 @@ function edit(student_recid) {
 }
 function show_courses(student_id) {
 	//TODO: Jump to show courses
+	window.location.assign("__MODULE__/find?student_id=" + student_id);
 }
 function del(student_recid) {	
 	//TODO: Delete a student. It may use AJAX
