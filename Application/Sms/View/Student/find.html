@@ -16,6 +16,9 @@ function del(student_recid) {
 	//TODO: Delete a student. It may use AJAX
 	window.location.assign("__URL__/delete?sutdent_recid=" + student_recid);
 }
+function goback(){
+	window.location.assign("__MODULE__/User/utility");
+}
 </script>
 </head>
 <body>
@@ -36,6 +39,7 @@ function del(student_recid) {
 	</td>
 	</tr>
 	</volist>
+	<tr><td align="center"><input type="button" value="return" onclick="goback()"></td></tr>
 </table>
 </body>
 </html>

@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <title>Update course</title>
 </head>
+<script>
+function goback(){
+	window.location.assign("__MODULE__/User/utility");
+}
+</script>
 <body>
 <form method="post" action="__URL__/update">
 <input type="hidden" name="course_recid" value="{$vo.course_recid}" />
@@ -14,7 +19,7 @@
 <tr><td>credit</td><td><input type="text" value="{$vo.credit}" maxlength=20 size=20 name="credit"></td></tr>
 <tr><td>allowed grade</td><td><input type="text" value="{$vo.allowed_grade}" maxlength=20 size=20 name="allowed_grade"></td></tr>
 <tr><td>cancel grade</td><td><input type="text" value="{$vo.cancel_grade}" maxlength=20 size=20 name="cancel_grade"></td></tr>
-<tr><td><input type="submit" value="ok"></td></tr>
+<tr><td colspan="2" align="right"><input type="submit" value="ok"><input type="button" value="return" onclick="goback()"></td></tr>
 </table>
 </form>
 </body>
