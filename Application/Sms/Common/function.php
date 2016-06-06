@@ -38,3 +38,17 @@ function authUser($user,$pwd) {
 	session('user',$user);
 	return true;
 }
+
+function auth() {
+	if(IS_POST){
+		$res = authUser(I('post.user'),I('post.password'));
+		if ($res) {
+			utility();
+		}
+		else
+			$this->error($res);
+	}
+	else if(IS_GET){
+		$this->display();
+	}
+}

@@ -38,9 +38,9 @@ class CourseController extends Controller{
 			else
 				$this->error($form->getError());
 	}
-	public function edit($course_recid=1){
+	public function edit(){
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-		
+		$course_recid=I('get.course_recid');
 		$form=D('Course');
 		$this->assign('vo',$form->find($course_recid));
 		$form = new Model();

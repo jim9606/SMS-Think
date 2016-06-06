@@ -36,9 +36,9 @@ public function insert() {
 			else 
 				$this->error($form->getError());
 	}
-	public function edit($teacher_recid=1){
+	public function edit(){
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-		
+		$teacher_recid=I('get.teacher_recid');
 		$Form=D('Teacher');
 		$this->assign('vo',$Form->find($teacher_recid));
 		$this->display();

@@ -6,11 +6,11 @@
 <script>
 function edit(student_recid) {
 	//console.log(student_recid);
-	window.location.assign("__URL__/edit?sutdent_recid=" + student_recid);
+	window.location.assign("__URL__/edit?student_recid=" + student_recid);
 }
 function show_courses(student_id) {
 	//TODO: Jump to show courses
-	window.location.assign("__MODULE__/find?student_id=" + student_id);
+	window.location.assign("__MODULE__/Course/find?student_id=" + student_id);
 }
 function del(student_recid) {	
 	//TODO: Delete a student. It may use AJAX

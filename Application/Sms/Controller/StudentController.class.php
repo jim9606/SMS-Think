@@ -45,9 +45,9 @@ class StudentController extends Controller{
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		$this->show();
 	}
-	public function edit($student_recid){
+	public function edit(){
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-		
+		$student_recid=I('get.student_recid');
 		$Form=D('Student');
 		$this->assign('vo',$Form->find($student_recid));
 		$this->display();

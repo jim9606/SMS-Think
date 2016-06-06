@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>User information</title>
+</head>
+<script>
+function passwd() {
+	window.location.assign("__MODULE__/User/passwd");
+}
+function check_student() {
+	window.location.assign("__MODULE__/Student/find");
+}
+function check_teacher() {
+	window.location.assign("__MODULE__/Teacher/find");
+}
+function check_course() {
+	window.location.assign("__MODULE__/Course/find");
+}
+function add_course() {
+	window.location.assign("__MODULE__/Course/add");
+}
+function add_teacher() {
+	window.location.assign("__MODULE__/Teacher/add");
+}
+function add_student() {
+	window.location.assign("__MODULE__/Student/add");
+}
+function test() {
+	window.location.assign("__URL__/test");
+}
+</script>
+<body>
+<table align="center">
+	<tr><td><eq name="Think.session.permissions.read" value="1"><button onclick="passwd()">Change password</button></eq></td>
+	<td><eq name="Think.session.permissions.read" value="1"><button onclick="check_student()">Check Student</button></eq></td>
+	<td><eq name="Think.session.permissions.read" value="1"><button onclick="check_teacher()">Check Teacher</button></eq></td>
+	<td><eq name="Think.session.permissions.read" value="1"><button onclick="check_course()">Check Course</button></eq></td>	
+	<td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_student()">Add Student</button></eq></td>
+	<td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_teacher()">Add Teacher</button></eq></td>
+	<td><eq name="Think.session.permissions.admin" value="1"><button onclick="add_course()">Add Course</button></eq></td></tr>
+	<tr><td>&nbsp; <td></tr>
+	<tr><td>&nbsp; <td><th align="right">ID</th><td align="right">{$res.id}</td></tr>
+	<tr><td>&nbsp; <td><th align="right">Type</th><td align="right">{$res.type}</td></tr>
+	<tr><td>&nbsp; <td><th align="right">User</th><td align="right">{$res.user}</td></tr>
+</table>
+</body>
+</html>
