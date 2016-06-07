@@ -39,8 +39,24 @@ class CourseModel extends Model {
 		->select();
 	}
 	
+	public function getCourseAndStudentBy($condition) {
+		return $this->table(array('course'=>'C','student'=>'S','enroll'=>'E'))
+		->where(array(
+				'E.course_id = C.course_id',
+				'E.student_id = S.student_id'
+		))
+		->where($condition)
+		->field(array(
+				'S.name'=>'student_name',
+				'C.name'=>'course_name',
+				'E.student_id',
+				'E.course_id',
+				'E.grades'
+		))
+		->select();
+	}
 	public function authFindByStudent($data){
-		var_dump($data);
+		//var_dump($data);
 		$condition=array();
 		//valide the data
 		if(@$data['student_id'] or @$data['student_name']){
@@ -61,7 +77,7 @@ class CourseModel extends Model {
 				$condition['course_id']=$data['course_id'];
 			}
 		}
-		//$var_dump($condition);
+		//var_dump($condition);
 		return $condition;
 	}
 	

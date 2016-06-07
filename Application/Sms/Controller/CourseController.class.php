@@ -128,17 +128,11 @@ class CourseController extends Controller{
 		IS_POST or !C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		$form=new CourseModel();
 		$condition=$form->authFindByStudent(I('post.'));
+		$res=$form->getCourseAndStudentBy($condition);
+		//var_dump($res);	
 		
-		
-		$enroll=new Model();
-		$res = $enroll->table('enroll')->where($condition)->select();
-		$res['student_name']=$enroll->table('student')->getFieldByCourse_id($res['student_id'],'name');
-		$res['course_name']=$enroll->table('course')->getFieldByCourse_id($res['course_id'],'name');
-		var_dump($res);
-		
-		/*
 		$this->assign('list',$res);
 		$this->display();
-		*/
+		
 	}
 }
