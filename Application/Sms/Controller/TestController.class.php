@@ -20,11 +20,9 @@ class TestController extends Controller {
 	public function session() {
 		var_dump(session());
 	}
-	public function fetchSql() {
+	public function fetchSql($student_id) {
 		$form = new CourseModel();
-		$sql = $form->getEnrollableByStudent();
-		var_dump($sql);
-		$res = $form->query($sql);
+		$res = $form->getEnrollableByStudentId($student_id);
 		var_dump($res);
 	}
 }
