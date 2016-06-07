@@ -76,13 +76,10 @@ class CourseController extends Controller{
 	public function enroll(){
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		if(IS_GET){
-			if(session('type')=="student"){
-				$form=new Model();
-				$course=$form->table('course')->getByCourse_id(I('get.course_id'));
-				$this->assign('course',$course);
-				$this->display();
-			}
-			else $this->error("You are not student!");
+			$form=new Model();
+			$course=$form->table('course')->getByCourse_id(I('get.course_id'));
+			$this->assign('course',$course);
+			$this->display();
 		}
 		else if(IS_POST){
 			$form=D('Student');

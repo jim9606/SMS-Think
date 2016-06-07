@@ -8,7 +8,7 @@ function edit(course_recid) {
 	//console.log(student_recid);
 	window.location.assign("__URL__/edit?course_recid=" + course_recid);
 }
-function show_courses(course_id) {
+function enroll(course_id) {
 	//TODO: Jump to show courses
 	window.location.assign("__URL__/enroll?course_id=" + course_id);
 }
@@ -25,7 +25,7 @@ function goback(){
 </script>
 </head>
 <body>
-<table border="1">
+<table border="1" align="center">
 	<tr>
 	<th>#</th><th>ID</th><th>Name</th><th>Teacher id</th><th>Credit</th><th>Allowed grade</th><th>Cancel grade</th><th>Action</th>
 	</tr>
@@ -35,13 +35,13 @@ function goback(){
 	<td>{$vo.teacher_id}</td><td>{$vo.credit}</td><td>{$vo.allowed_grade}</td><td>{$vo.cancel_grade}</td>
 	<td>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick="edit({$vo.course_recid})">Edit</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick="show_cousrces({$vo.course_id})">Enroll</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick="enroll({$vo.course_id})">Enroll</button></eq>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick="del({$vo.course_recid})">Delete</button></eq>
 	<eq name="Think.session.permissions.score" value="1"><button onclick="score({$vo.course_id})">Score</button></eq>
 	</td>
 	</tr>
 	</volist>
-	<tr><td align="center"><input type="button" value="return" onclick="goback()"></td></tr>
+	<tr><td colspan="8" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
 </table>
 </body>
 </html>
