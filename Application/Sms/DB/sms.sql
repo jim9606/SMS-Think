@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-06-07 16:01:17
+-- Generation Time: 2016-06-07 20:11:05
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -51,15 +51,15 @@ CREATE TABLE IF NOT EXISTS `course` (
 DROP TABLE IF EXISTS `enroll`;
 CREATE TABLE IF NOT EXISTS `enroll` (
   `enroll_id` int(11) NOT NULL AUTO_INCREMENT,
-  `sutdent_id` varchar(10) NOT NULL,
+  `student_id` varchar(10) NOT NULL,
   `course_id` varchar(7) NOT NULL,
   `enroll_year` smallint(6) NOT NULL,
   `grades` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`enroll_id`),
-  UNIQUE KEY `unique_enroll` (`sutdent_id`,`course_id`,`enroll_year`),
-  KEY `sutdent_id` (`sutdent_id`),
+  UNIQUE KEY `unique_enroll` (`student_id`,`course_id`,`enroll_year`),
+  KEY `sutdent_id` (`student_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `class` varchar(20) NOT NULL,
   PRIMARY KEY (`student_recid`),
   UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`teacher_recid`),
   UNIQUE KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user` varchar(10) NOT NULL,
   `password` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 限制导出的表
@@ -124,7 +124,7 @@ ALTER TABLE `course`
 -- 限制表 `enroll`
 --
 ALTER TABLE `enroll`
-  ADD CONSTRAINT `enroll_ibfk_1` FOREIGN KEY (`sutdent_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `enroll_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `enroll_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
