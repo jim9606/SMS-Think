@@ -11,22 +11,10 @@ class StudentController extends Controller{
 		$data = $form->create(I('post.'),Model::MODEL_INSERT);
 		if ($data) {
 			$res = $form->add($data);
-			$form2=M('User');
-			$user['type']='student';
-			$user['user']=I('post.student_id');
-			$user['password']=C('USER_DEFAULT_PASSWORD');
-			$data2 = $form->create($user,Model::MODEL_UPDATE);
-			if($data2){
-				$res2=$form2->add($data2);
-				if($res) {
-					if($res2) $this->success("Record updated");
-					else $this->error("User add failed");
-				}
-				else
-					//if $res === 0 No update because of no modified values
-					$this->error(($res === 0) ? "Not modified" : $form->getError());
-				}
-				else $this->error($form2->getError());
+			if($res) {
+				$this->success("New record $res#");
+			}else
+				$this->error($form->getError());
 		}else 
 			$this->error($form->getError());
 	}
@@ -40,7 +28,7 @@ class StudentController extends Controller{
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
 		if ($data) {
 			$res = $form->save($data);
-			//var_dump($res);
+			var_dump($res);
 			if($res) {
 				$this->success("Record updated");
 			}else
