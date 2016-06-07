@@ -19,6 +19,12 @@ function del(course_recid) {
 function score(course_id){
 	window.location.assign("__URL__/score?course_id=" + course_id);
 }
+function findByStudent(){
+	window.location.assign("__URL__/findByStudent");
+}
+function findByTeacher(){
+	window.location.assign("__URL__/findByTeacher");
+}
 function goback(){
 	window.location.assign("__MODULE__/User/utility");
 }
@@ -42,7 +48,9 @@ function goback(){
 	</td>
 	</tr>
 	</volist>
-	<tr><td colspan="8" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
+	<tr><td colspan="6" align="right"><eq name="Think.session.permissions.read" value="1"><button onclick="findByStudent()">Find By Student</button></eq></td>
+    <td align="right"><eq name="Think.session.permissions.read" value="1"><button onclick="findByTeacher()">Find By Teacher</button></eq></td>
+	<td align="right"><input type="button" value="return" onclick="goback()"></td></tr>
 </table>
 </body>
 </html>
