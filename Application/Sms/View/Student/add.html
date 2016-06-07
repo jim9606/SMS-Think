@@ -12,7 +12,7 @@ function goback(){
 <body>
 <form method="post" action="__URL__/insert">
 <table align="center">
-<tr><td>student id</td><td><input type="text" maxlength=20 size=20 name="student_id"></td></tr>
+<tr><td>student id</td><td><input type="text" maxlength=20 size=20 name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
 <tr><td>name</td><td><input type="text" maxlength=20 size=20 name="name"></td></tr>
 			<tr><td>gender</td><td>
 				Male<input type="radio" name="gender" value="0"/>

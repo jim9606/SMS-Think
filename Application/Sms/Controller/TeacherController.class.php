@@ -1,6 +1,7 @@
 <?php
 namespace Sms\Controller;
 use Think\Controller;
+use Think\Model;
 class TeacherController extends Controller{
 public function insert() {
 		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -11,7 +12,11 @@ public function insert() {
 		if ($data) {
 			$res = $form->add($data);
 			if($res) {
-				$this->success("New record $res#");
+				$res2 = addUser('teacher', $data['teacher_id']);
+				if ($res2)
+					$this->success("New record $res#");
+				else 
+					$this->error("User add failed : $res2");
 			}else
 				$this->error($form->getError());
 		}else 
