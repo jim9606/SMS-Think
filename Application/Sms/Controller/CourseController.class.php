@@ -10,6 +10,9 @@ class CourseController extends Controller{
 	
 			$form = D('Course');
 			$data = $form->create(I('post.'),Model::MODEL_INSERT);
+			$error2 = $form->validateCourse($data);
+			if ($error2 !== true)
+				$this->error($error2);
 			if ($data) {
 				$res = $form->add($data);
 				if($res) {
@@ -27,6 +30,9 @@ class CourseController extends Controller{
 	
 			$form = D('Course');
 			$data = $form->create(I('post.'),Model::MODEL_UPDATE);
+			$error2 = $form->validateCourse($data);
+			if ($error2 !== true)
+				$this->error($error2);
 			if ($data) {
 				$res = $form->save($data);
 				var_dump($res);
@@ -76,6 +82,7 @@ class CourseController extends Controller{
 		}
 	}
 	public function enroll(){
+		//TODO: Totally rewrite this
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		if(IS_GET){
 			$form=new Model();
