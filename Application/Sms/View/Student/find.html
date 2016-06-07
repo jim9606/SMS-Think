@@ -28,7 +28,7 @@ function goback(){
 	<th>Entrance Year</th><th>Entrance Age</th><th>Class</th>
 	<th>Action</th>
 	</tr>
-	<volist name="list" id="vo" empty="Nothing found">
+	<volist name="list" id="vo">
 	<tr>
 	<td>{$i}</td><td>{$vo.student_id}</td><td>{$vo.name}</td><td><if condition="$vo.gender eq 0">M<else/>F</if></td>
 	<td>{$vo.entrance_year}</td><td>{$vo.entrance_age}</td><td>{$vo.class}</td>

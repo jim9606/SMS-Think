@@ -5,21 +5,13 @@
 	<title>Change password</title>
 </head>
 <body>
-<form method="post" action="__URL__/passwd">
+<form method="post" action="__URL__/passwd" align="center">
 <table align="center">
-<tr><td>&nbsp; <td></tr>
-<tr><td>&nbsp; <td></tr>
-<tr><td>&nbsp; <td></tr>
-<tr>
-<td>
-New password:
-</td>
-<td>
-<input type="password" name="password" />
-</td>
-</tr>
-<tr><td colspan="2" align="right"><input type="submit" value="ok"></td></tr>
+	<tr><th>User</th><td>{$Think.session.user}</td></tr>
+	<tr><th>Type</th><td>{$Think.session.type}</td></tr>
+	<tr><th>New Password</th><td><input type="password" name="password" /></td></tr>
 </table>
+	<input type="submit" value="OK">
 </form>
 </body>
 </html>

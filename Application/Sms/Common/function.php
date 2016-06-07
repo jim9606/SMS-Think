@@ -38,3 +38,21 @@ function authUser($user,$pwd) {
 	session('user',$user);
 	return true;
 }
+
+/**
+ * 
+ * @param string $type
+ * @param string $user
+ * @param string $pwd = C('USER_DEFAULT_PASSWORD')
+ * @return string|true true if success
+ */
+function addUser($type,$user,$pwd = null) {
+	$pwd or $pwd = C('USER_DEFAULT_PASSWORD');
+	$form = new Model('user');
+	$form->create(array('type'=>$type,'user'=>$user,'password'=>$pwd));
+	$res = $form->add();
+	if (!$res) {
+		return $form->getError();
+	}
+	return true;
+}

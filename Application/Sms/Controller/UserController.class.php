@@ -17,8 +17,8 @@ class UserController extends Controller{
 	public function auth() {
 		if(IS_POST){
 			$res = authUser(I('post.user'),I('post.password'));
-			if ($res) {
-				$this->success("Login successfully",U('utility'));
+			if ($res === true) {
+				$this->redirect('utility');
 			}
 			else
 				$this->error($res);
@@ -33,17 +33,20 @@ class UserController extends Controller{
 		$this->success('You have logged out');
 	}
 	public function passwd(){
+		if (!session('?type') or session('type') === 'anon')
+			$this->error('You should log in first','auth');
 		if(IS_GET)
 		{
-			$this->assign('user',session('user'));
 			$this->display();
 		}
 		else if(IS_POST)
 		{
 			$form = new Model();
-			$res = $form->table('user')->where(array('user'=>session('user')))->save(array('password',I('post.password')));
-			if($res) $this->success("Record updated");
-			else $this->error(($res === 0) ? "Not modified" : $form->getError());
+			$res = $form->table('user')->where(array('user'=>session('user')))->save(array('password'=>I('post.password')));
+			if($res) 
+				$this->success('Password Changed','utility');
+			else 
+				$this->error(($res === 0) ? "Not modified" : $form->getError() , 'utility');
 		}
 	}
 }

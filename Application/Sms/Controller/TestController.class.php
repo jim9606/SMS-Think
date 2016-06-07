@@ -16,4 +16,7 @@ class TestController extends Controller {
 			var_dump(I('post.'));
 		}
 	}
+	public function session() {
+		var_dump(session());
+	}
 }
