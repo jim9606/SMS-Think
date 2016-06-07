@@ -8,7 +8,7 @@ function edit(teacher_recid) {
 	//console.log(student_recid);
 	window.location.assign("__URL__/edit?teacher_recid=" + teacher_recid);
 }
-function show_courses(teacher_id) {
+function enroll(teacher_id) {
 	//TODO: Jump to show courses
 	window.location.assign("__MODULE__/Course/find?teacher_id=" + teacher_id);
 }
@@ -30,9 +30,9 @@ function goback(){
 	<tr>
 	<td>{$i}</td><td>{$vo.teacher_id}</td><td>{$vo.name}</td>
 	<td>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick="edit({$vo.teacher_recid})">Edit</button></eq>
-	<eq name="Think.session.permissions.read" value="1"><button onclick="show_cousrces({$vo.teacher_id})">Courses</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick="del({$vo.teacher_recid})">Delete</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='edit("{$vo.teacher_recid}")'>Edit</button></eq>
+	<eq name="Think.session.permissions.read" value="1"><button onclick='enroll("{$vo.teacher_id}")'>Courses</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.teacher_recid}")'>Delete</button></eq>
 	</td>
 	</tr>
 	</volist>
