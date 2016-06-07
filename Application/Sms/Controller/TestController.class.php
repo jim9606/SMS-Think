@@ -1,6 +1,7 @@
 <?php
 namespace Sms\Controller;
 use Think\Controller;
+use Sms\Model\CourseModel;
 //Just For test. Do not use it.
 class TestController extends Controller {
 	//auth and check session
@@ -18,5 +19,12 @@ class TestController extends Controller {
 	}
 	public function session() {
 		var_dump(session());
+	}
+	public function fetchSql() {
+		$form = new CourseModel();
+		$sql = $form->getEnrollableByStudent();
+		var_dump($sql);
+		$res = $form->query($sql);
+		var_dump($res);
 	}
 }

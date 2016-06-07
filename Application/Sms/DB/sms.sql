@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-06-02 05:50:22
+-- Generation Time: 2016-06-07 16:01:17
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
@@ -35,12 +35,12 @@ CREATE TABLE IF NOT EXISTS `course` (
   `name` varchar(20) NOT NULL,
   `teacher_id` varchar(5) NOT NULL,
   `credit` decimal(10,0) NOT NULL,
-  `allowed_grade` smallint(6) NOT NULL,
-  `cancel_grade` smallint(6) DEFAULT NULL,
+  `allowed_year` smallint(6) NOT NULL,
+  `cancel_year` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`course_recid`),
   UNIQUE KEY `course_id` (`course_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`teacher_recid`),
   UNIQUE KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 

@@ -27,12 +27,12 @@ function goback(){
 <body>
 <table border="1" align="center">
 	<tr>
-	<th>#</th><th>ID</th><th>Name</th><th>Teacher id</th><th>Credit</th><th>Allowed grade</th><th>Cancel grade</th><th>Action</th>
+	<th>#</th><th>ID</th><th>Name</th><th>Teacher id</th><th>Credit</th><th>Allowed Year</th><th>Cancel Year</th><th>Action</th>
 	</tr>
 	<volist name="list" id="vo" empty="Nothing found">
 	<tr>
 	<td>{$i}</td><td>{$vo.course_id}</td><td>{$vo.name}</td>
-	<td>{$vo.teacher_id}</td><td>{$vo.credit}</td><td>{$vo.allowed_grade}</td><td>{$vo.cancel_grade}</td>
+	<td>{$vo.teacher_id}</td><td>{$vo.credit}</td><td>{$vo.allowed_year}</td><td>{$vo.cancel_year}</td>
 	<td>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick="edit({$vo.course_recid})">Edit</button></eq>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick="enroll({$vo.course_id})">Enroll</button></eq>
