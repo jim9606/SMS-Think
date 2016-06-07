@@ -9,11 +9,11 @@
 <input type="hidden" name="course_id" value="{$course.course_id}">
 <input type="hidden" name="allowed_year" value="{$course.allowed_year}">
 <input type="hidden" name="cancel_year" value="{$course.cancel_year}">
-<table>
-<tr><th>Course:</th><td>{$course.name}</td></tr>
-<tr><th>Student id:</th><td><input type="text" name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
-<tr><th>Enroll year:</th><td><input type="text" name="enroll_year"></td></tr>
-<tr><td><input type="submit" value="enroll"></td></tr>
+<table align="center">
+<tr><th align="left">Course:</th><td>{$course.name}</td></tr>
+<tr><th align="left">Student id:</th><td><input type="text" name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
+<tr><th align="left">Enroll year:</th><td><input type="text" name="enroll_year"></td></tr>
+<tr><td colspan="2" align="right"><input type="submit" value="enroll"></td></tr>
 </table>
 </form>
 
