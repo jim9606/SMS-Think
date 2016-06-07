@@ -56,25 +56,24 @@ class CourseModel extends Model {
 		->select();
 	}
 	public function authFindByStudent($data){
-		//var_dump($data);
 		$condition=array();
 		//valide the data
 		if(@$data['student_id'] or @$data['student_name']){
 			$form=new StudentModel();
 			if(@$data['student_name']){
-				$condition['student_id']=$form->getFieldByName($data['student_name'],'student_id');
+				$condition['E.student_id']=$form->getFieldByName($data['student_name'],'student_id');
 			}
 			if(@$data['student_id']){
-				$condition['student_id']=$data['student_id'];
+				$condition['E.student_id']=$data['student_id'];
 			}
 		}
 		if(@$data['course_id'] or @$data['course_name']){
 			$form=new CourseModel();
 			if(@$data['course_name']){
-				$condition['course_id']=$form->getFieldByName($data['course_name'],'course_id');
+				$condition['E.course_id']=$form->getFieldByName($data['course_name'],'course_id');
 			}
 			if(@$data['course_id']){
-				$condition['course_id']=$data['course_id'];
+				$condition['E.course_id']=$data['course_id'];
 			}
 		}
 		//var_dump($condition);
