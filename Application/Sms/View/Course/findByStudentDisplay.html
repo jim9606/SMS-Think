@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Enroll Information</title>
+</head>
+<body>
+<table align="center" border="1">
+<tr><th>Student id</th><th>Student name</th><th>Course id</th><th>Course name</th><th>Score</th></tr>
+<volist name="list" id="vo" empty="Nothing found">
+<tr>
+<td>{$vo.student_id}</td><td>{$vo.student_name}</td><td>{$vo.course_id}</td><td>{$vo.course_name}</td><td>{$vo.score}</td>
+</tr>
+</volist>
+</table>
+</body>
+</html>

@@ -2,6 +2,7 @@
 namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
+use Sms\Model\CourseModel;
 class CourseController extends Controller{
 	public function insert() {
 			IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -54,6 +55,7 @@ class CourseController extends Controller{
 		$this->display();
 	}
 	public function find() {
+		//var_dump(I('get.'));
 		//Do not contain any empty values
 		//Invalid keys will be ignored
 		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -93,12 +95,14 @@ class CourseController extends Controller{
 			$student=$form->where($query)->find();
 			$grade=date('Y')-$student['entrance_year'];
 			if(I('post.allowed_grade')<=$grade&&I('post.cancel_grade')>$grade){
-				$query['course_id']=I('post.course_id');
-				$query['enroll_year']=I('post.enroll_year');
 				$enroll=M('enroll');//may change to the D method and add the model
-				$data = $enroll->create(I('post.'),Model::MODEL_INSERT);
+				$data = $enroll->create(array(
+						'course_id'=>I('post.course_id'),
+						'enroll_year'=>I('post.enroll_year'),
+						'student_id'=>I('post.student_id')						
+				));
 				if($data){
-					$res=$enroll->add($res);
+					$res=$enroll->add();
 					if($res) {
 						$this->success("New record $res#");
 					}
@@ -110,5 +114,31 @@ class CourseController extends Controller{
 			}
 			else $this->error("Your grade is not allowed to enroll this course.");
 		}
+	}
+	/**
+	 *show but cannot change the search results
+	 */
+	public function findByTeacher(){
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		if(IS_GET){
+			$this->display();
+		}
+		else if(IS_POST){
+			$form=new CourseModel();
+			$condition=$form->authFindByTeacher(I('post.'));
+			$this->redirect('find',$condition);
+		}
+	}
+	
+	public function findByStudentDisplay(){
+		IS_POST or !C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$form=new CourseModel();
+		$condition=$form->authFindByStudent(I('post.'));
+		$res=$form->getCourseAndStudentBy($condition);
+		//var_dump($res);	
+		
+		$this->assign('list',$res);
+		$this->display();
+		
 	}
 }

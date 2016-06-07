@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+</head>
+<body>
+<form method="post" action="__URL__/findByStudentDisplay">
+<table align="center">
+<tr><td>Student id:</td><td><input name="student_id" type="text" 
+placeholder="Must be 10 digits" pattern="\d{10}"></td></tr>
+<tr><td>Student name:</td><td><input name="student_name" type="text"></td></tr>
+<tr><td>Course id:</td><td><input name="course_id" type="text" 
+placeholder="Must be 7 digits" pattern="\d{7}"></td></tr>
+<tr><td>Course name:</td><td><input name="course_name" type="text"></td></tr>
+<tr><td colspan="2" align="right"><input type="submit" value="search"></td></tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+</head>
+<body>
+<form method="post" action="__URL__/findByTeacher">
+<table align="center">
+<tr><td>Course id:</td><td><input name="course_id" type="text" 
+placeholder="Must be 7 digits" pattern="\d{7}"></td></tr>
+<tr><td>Course name:</td><td><input name="course_name" type="text"></td></tr>
+<tr><td>Teacher id:</td><td><input name="teacher_id" type="text" 
+placeholder="Must be 5 digits" pattern="\d{5}"></td></tr>
+<tr><td>Teacher name:</td><td><input name="teacher_name" type="text"></td></tr>
+<tr><td colspan="2" align="right"><input type="submit" value="search"></td></tr>
+</table>
+</form>
+</body>
+</html>
