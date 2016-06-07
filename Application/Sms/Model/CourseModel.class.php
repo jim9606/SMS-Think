@@ -5,8 +5,50 @@ class CourseModel extends Model {
 	protected $insertFields = 'course_id,name,teacher_id,credit,allowed_year,cancel_year';
 	protected $updateFields = 'course_recid,name,teacher_id,credit,allowed_year,cancel_year';
 	protected $_validate = array(
+			array('course_id','7','ID length must be 7',self::EXISTS_VALIDATE,'length'),
+			array('course_id','','ID exists',self::EXISTS_VALIDATE,'unique'),
+			array('course_id','require','ID expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
+			array('course_id','number','ID must be 7 digits'),
 			
+			array('name','1,20','Invalid name',self::EXISTS_VALIDATE,'length'),
+			array('name','require','Name expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
+			
+			array('teacher_id','checkTeacherId','Teacher not exists',self::EXISTS_VALIDATE,'callback'),
+			array('teacher_id','require','Teacher ID expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
+			
+			array('credit','number','Invalid credit'),
+			array('credit','require','Credit expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
+			
+			array('allowed_year','1900,2999','Invalid entrance year',self::EXISTS_VALIDATE,'between'),
+			array('allowed_year','require','Entrance year expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
+			
+			array('cancel_year','1900,2999','Invalid entrance year',self::EXISTS_VALIDATE,'between'),
+			array('cancel_year','require','Entrance year expected',self::MUST_VALIDATE,'',self::MODEL_INSERT),
 	);
+	protected function checkTeacherId($teacher_id) {
+		$form = new TeacherModel();
+		return ($form->getByTeacher_id($teacher_id) != null);
+	}
+	
+	protected $_auto = array(
+			//if cancel_year is null,set it to max
+			array('cancel_year','fillCancel_year',self::MODEL_BOTH,'callback')
+	);
+	protected function fillCancel_year($year) {
+		return ($year) ? $year : 2999;
+	}
+	
+
+	/**
+	 * Validate course
+	 * @param array $data
+	 * @return string|true True if success
+	 */
+	public function validateCourse($data) {
+		if (isset($data['allowed_year']) and @$data['cancel_year'] != null and $data['allowed_year'] > $data['cancel_year'])
+			return 'Cancel year should not smaller than allowed year';
+		return true;
+	}
 	
 	/**
 	 * Get which courses a student can enroll by student_id
