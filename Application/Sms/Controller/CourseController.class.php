@@ -82,6 +82,7 @@ class CourseController extends Controller{
 		}
 	}
 	public function enroll(){
+		//TODO: Totally rewrite this
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		if(IS_GET){
 			$form=new Model();
