@@ -11,7 +11,7 @@
 <input type="hidden" name="cancel_grade" value="{$course.cancel_grade}">
 <table>
 <tr><th>Course:</th><td>{$course.name}</td></tr>
-<tr><th>Student id:</th><td><input type="text" name="student_id"></td></tr>
+<tr><th>Student id:</th><td><input type="text" name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
 <tr><th>Enroll year:</th><td><input type="text" name="enroll_year"></td></tr>
 <tr><td><input type="submit" value="enroll"></td></tr>
 </table>
