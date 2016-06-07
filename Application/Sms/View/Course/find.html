@@ -34,10 +34,10 @@ function goback(){
 	<td>{$i}</td><td>{$vo.course_id}</td><td>{$vo.name}</td>
 	<td>{$vo.teacher_id}</td><td>{$vo.credit}</td><td>{$vo.allowed_grade}</td><td>{$vo.cancel_grade}</td>
 	<td>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick="edit({$vo.course_recid})">Edit</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick="enroll({$vo.course_id})">Enroll</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick="del({$vo.course_recid})">Delete</button></eq>
-	<eq name="Think.session.permissions.score" value="1"><button onclick="score({$vo.course_id})">Score</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='edit("{$vo.course_recid}")'>Edit</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='enroll("{$vo.course_id}")'>Enroll</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.course_recid}")'>Delete</button></eq>
+	<eq name="Think.session.permissions.score" value="1"><button onclick='score("{$vo.course_id}")'>Score</button></eq>
 	</td>
 	</tr>
 	</volist>
