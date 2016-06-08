@@ -13,15 +13,15 @@ function goback(){
 	<form method="post" action="__URL__/update">
 		<input type="hidden" name="student_recid" value="{$vo.student_recid}" />
 		<table>
-			<tr><td>student id</td><td>{$vo.student_id}</td></tr>
-			<tr><td>name</td><td><input type="text" value="{$vo.name}" maxlength=20 size=20 name="name" /></td></tr>
-			<tr><td>gender</td><td>
+			<tr><th>student id</th><td>{$vo.student_id}</td></tr>
+			<tr><th>name</th><td><input type="text" value="{$vo.name}" maxlength=20 size=20 name="name" /></td></tr>
+			<tr><th>gender</th><td>
 				Male<input type="radio" name="gender" value=0 <if condition="$vo.gender eq 0"> checked="checked" </if> />
 				Female<input type="radio" name="gender" value=1 <if condition="$vo.gender eq 1"> checked="checked" </if> />
 			</td></tr>
-			<tr><td>entrance age</td><td><input type="text" value="{$vo.entrance_age}" maxlength=20 size=20 name="entrance_age" /></td></tr>
-			<tr><td>entrance year</td><td><input type="text" value="{$vo.entrance_year}" maxlength=20 size=20 name="entrance_year" /></td></tr>
-			<tr><td>class</td><td><input type="text" value="{$vo.class}" maxlength=20 size=20 name="class" /></td></tr>
+			<tr><th>entrance age</th><td><input type="text" value="{$vo.entrance_age}" maxlength=20 size=20 name="entrance_age" /></td></tr>
+			<tr><th>entrance year</th><td><input type="text" value="{$vo.entrance_year}" maxlength=20 size=20 name="entrance_year" /></td></tr>
+			<tr><th>class</th><td><input type="text" value="{$vo.class}" maxlength=20 size=20 name="class" /></td></tr>
 			<tr><td colspan="2" align="right"><input type="submit" value="ok"><input type="button" value="return" onclick="goback()"></td></tr>
 		</table>
 	</form>

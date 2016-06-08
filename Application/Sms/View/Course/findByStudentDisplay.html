@@ -4,8 +4,14 @@
 <meta charset="UTF-8">
 <title>Enroll Information</title>
 </head>
+<script>
+function goback(){
+	window.location.assign("__MODULE__/User/utility");
+}
+</script>
 <body>
 <table align="center" border="1">
+<tr><td colspan="5" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
 <tr><th>Student id</th><th>Student name</th><th>Course id</th><th>Course name</th><th>Score</th></tr>
 <volist name="list" id="vo">
 <tr>

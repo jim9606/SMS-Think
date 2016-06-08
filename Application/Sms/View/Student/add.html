@@ -12,16 +12,16 @@ function goback(){
 <body>
 <form method="post" action="__URL__/insert">
 <table align="center">
-<tr><td>student id</td><td><input type="text" maxlength=20 size=20 name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
-<tr><td>name</td><td><input type="text" maxlength=20 size=20 name="name"></td></tr>
-			<tr><td>gender</td><td>
+<tr><th>student id</th><td><input type="text" maxlength=20 size=20 name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
+<tr><th>name</th><td><input type="text" maxlength=20 size=20 name="name"></td></tr>
+			<tr><th>gender</th><td>
 				Male<input type="radio" name="gender" value="0"/>
 				Female<input type="radio" name="gender" value="1"/>
 			</td></tr>
-<tr><td>entrance age</td><td><input type="text" maxlength=20 size=20 name="entrance_age"></td></tr>
-<tr><td>entrance year</td><td><input type="text" maxlength=20 size=20 name="entrance_year"></td></tr>
-<tr><td>class</td><td><input type="text" maxlength=20 size=20 name="class"></td></tr>
-<tr><td colspan="2" align="right"><input type="submit" value="ok"><input type="button" value="return" onclick="goback()"></td></tr>
+<tr><th>entrance age</th><td><input type="text" maxlength=20 size=20 name="entrance_age"></td></tr>
+<tr><th>entrance year</th><td><input type="text" maxlength=20 size=20 name="entrance_year"></td></tr>
+<tr><th>class</th><td><input type="text" maxlength=20 size=20 name="class"></td></tr>
+<tr><td colspan="2" align="right"><input type="submit" value="ok">&nbsp;<input type="button" value="return" onclick="goback()"></td></tr>
 </table>
 </form>
 </body>
