@@ -136,8 +136,9 @@ class CourseController extends Controller{
 		$form=new CourseModel();
 		if(IS_POST) $condition=$form->authFindByStudent(I('post.'));
 		else if(IS_GET) $condition=$form->authFindByStudent(I('get.'));
-		$res=$form->getCourseAndStudentBy($condition);
-		$avg=$form->table('enroll')->where($condition)->avg('grades');
+		$query=$form->getCourseAndStudentBy($condition)->buildSql();
+		$res=$form->table($query.'a')->select();
+		$avg=$form->table($query.'a')->avg('grades');
 		//var_dump($avg);	
 		
 		$this->assign('list',$res);
@@ -158,5 +159,17 @@ class CourseController extends Controller{
 			$condition['course_id']=$data['course_id'];
 		}
 		$this->redirect('find',$condition);
+	}
+	
+	public function findByClass(){
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		if(IS_GET){
+			$this->display();
+		}
+		else if(IS_POST){
+			$form=new CourseModel();
+			$condition=$form->authFindByClass(I('post.'));
+			
+		}
 	}
 }

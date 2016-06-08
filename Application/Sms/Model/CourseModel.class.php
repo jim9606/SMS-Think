@@ -83,13 +83,14 @@ class CourseModel extends Model {
 	
 	/**
 	 * Give the condition to search the enroll table and add the course name and student name
-	 * @return array selected
+	 * @return Model SubQuery
 	 */
 	public function getCourseAndStudentBy($condition) {
 		//var_dump($condition);
 		$query=array();
 		if($condition['course_id']) $query['E.course_id']=$condition['course_id'];
 		if($condition['student_id']) $query['E.student_id']=$condition['student_id'];
+		if($condition['class']) $query['class']=$condition['class'];
 		return $this->table(array('course'=>'C','student'=>'S','enroll'=>'E'))
 		->where(array(
 				'E.course_id = C.course_id',
@@ -102,13 +103,15 @@ class CourseModel extends Model {
 				'E.student_id',
 				'E.course_id',
 				'E.grades'
-		))
-		->select();
+		));
 	}
 
 	public function authFindByStudent($data){
 		$condition=array();
 		//valide the data
+		if(@$data['class']){
+			$condition['class']=$data['class'];
+		}
 		if(@$data['student_id'] or @$data['student_name']){
 			$form=new StudentModel();
 			if(@$data['student_name']){
@@ -130,7 +133,6 @@ class CourseModel extends Model {
 		//var_dump($condition);
 		return $condition;
 	}
-	
 	public function authFindByTeacher($data){
 		//var_dump($data);
 		$condition=array();
