@@ -81,13 +81,21 @@ class CourseModel extends Model {
 		->select();
 	}
 	
+	/**
+	 * Give the condition to search the enroll table and add the course name and student name
+	 * @return array selected
+	 */
 	public function getCourseAndStudentBy($condition) {
+		//var_dump($condition);
+		$query=array();
+		if($condition['course_id']) $query['E.course_id']=$condition['course_id'];
+		if($condition['student_id']) $query['E.student_id']=$condition['student_id'];
 		return $this->table(array('course'=>'C','student'=>'S','enroll'=>'E'))
 		->where(array(
 				'E.course_id = C.course_id',
 				'E.student_id = S.student_id'
 		))
-		->where($condition)
+		->where($query)
 		->field(array(
 				'S.name'=>'student_name',
 				'C.name'=>'course_name',
@@ -97,25 +105,26 @@ class CourseModel extends Model {
 		))
 		->select();
 	}
+
 	public function authFindByStudent($data){
 		$condition=array();
 		//valide the data
 		if(@$data['student_id'] or @$data['student_name']){
 			$form=new StudentModel();
 			if(@$data['student_name']){
-				$condition['E.student_id']=$form->getFieldByName($data['student_name'],'student_id');
+				$condition['student_id']=$form->getFieldByName($data['student_name'],'student_id');
 			}
 			if(@$data['student_id']){
-				$condition['E.student_id']=$data['student_id'];
+				$condition['student_id']=$data['student_id'];
 			}
 		}
 		if(@$data['course_id'] or @$data['course_name']){
 			$form=new CourseModel();
 			if(@$data['course_name']){
-				$condition['E.course_id']=$form->getFieldByName($data['course_name'],'course_id');
+				$condition['course_id']=$form->getFieldByName($data['course_name'],'course_id');
 			}
 			if(@$data['course_id']){
-				$condition['E.course_id']=$data['course_id'];
+				$condition['course_id']=$data['course_id'];
 			}
 		}
 		//var_dump($condition);

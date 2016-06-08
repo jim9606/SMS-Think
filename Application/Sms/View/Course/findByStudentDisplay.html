@@ -7,11 +7,12 @@
 <body>
 <table align="center" border="1">
 <tr><th>Student id</th><th>Student name</th><th>Course id</th><th>Course name</th><th>Score</th></tr>
-<volist name="list" id="vo" empty="Nothing found">
+<volist name="list" id="vo">
 <tr>
-<td>{$vo.student_id}</td><td>{$vo.student_name}</td><td>{$vo.course_id}</td><td>{$vo.course_name}</td><td>{$vo.score}</td>
+<td>{$vo.student_id}</td><td>{$vo.student_name}</td><td>{$vo.course_id}</td><td>{$vo.course_name}</td><td>{$vo.grades}</td>
 </tr>
 </volist>
+<tr><td>average</td><td colspan="4" align="right">{$avg}</td></tr>
 </table>
 </body>
 </html>

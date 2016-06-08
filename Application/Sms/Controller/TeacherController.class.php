@@ -60,4 +60,19 @@ public function insert() {
 		$this->assign('list',$res);
 		$this->display();// show the result
 	}
+	public function findTeacher(){
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$data=I('post.');
+		$condition=array();
+		//valide the data
+		$form=M('Teacher');
+		if(@$data['name']){
+			$condition['teacher_id']=$form->getFieldByName($data['name'],'teacher_id');
+		}
+		if(@$data['teacher_id']){
+			$condition['teacher_id']=$data['teacher_id'];
+		}
+		$this->redirect('find',$condition);
+	}
 }

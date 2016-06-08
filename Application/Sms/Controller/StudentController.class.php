@@ -72,5 +72,20 @@ class StudentController extends Controller{
 		$this->assign('list',$res);
 		$this->show();
 	}
-
+	
+	public function findStudent(){
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$data=I('post.');
+		$condition=array();
+		//valide the data
+		$form=M('Student');
+		if(@$data['name']){
+			$condition['student_id']=$form->getFieldByName($data['name'],'student_id');
+		}
+		if(@$data['student_id']){
+			$condition['student_id']=$data['student_id'];
+		}
+		$this->redirect('find',$condition);
+	}
 }

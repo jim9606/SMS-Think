@@ -132,14 +132,31 @@ class CourseController extends Controller{
 	}
 	
 	public function findByStudentDisplay(){
-		IS_POST or !C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		$form=new CourseModel();
-		$condition=$form->authFindByStudent(I('post.'));
+		if(IS_POST) $condition=$form->authFindByStudent(I('post.'));
+		else if(IS_GET) $condition=$form->authFindByStudent(I('get.'));
 		$res=$form->getCourseAndStudentBy($condition);
-		//var_dump($res);	
+		$avg=$form->table('enroll')->where($condition)->avg('grades');
+		//var_dump($avg);	
 		
 		$this->assign('list',$res);
+		$this->assign('avg',$avg);
 		$this->display();
-		
+	}
+	public function findCourse(){
+		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$data=I('post.');
+		$condition=array();
+		//valide the data
+		$form=M('Course');
+		if(@$data['name']){
+			$condition['course_id']=$form->getFieldByName($data['name'],'course_id');
+		}
+		if(@$data['course_id']){
+			$condition['course_id']=$data['course_id'];
+		}
+		$this->redirect('find',$condition);
 	}
 }

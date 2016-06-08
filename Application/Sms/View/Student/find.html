@@ -10,7 +10,7 @@ function edit(student_recid) {
 }
 function show_courses(student_id) {
 	//TODO: Jump to show courses
-	window.location.assign("__MODULE__/Course/find?student_id=" + student_id);
+	window.location.assign("__MODULE__/Course/findByStudentDisplay?student_id=" + student_id);
 }
 function del(student_recid) {	
 	//TODO: Delete a student. It may use AJAX
@@ -22,6 +22,13 @@ function goback(){
 </script>
 </head>
 <body>
+<form action="__URL__/findStudent" method="post">
+<div align="center">
+id:<input name="student_id" type="text">
+name:<input name="name" type="text">
+<input type="submit" value="search">
+</div>
+</form>
 <table border="1" align="center">
 	<tr>
 	<th>#</th><th>ID</th><th>Name</th><th>Gender</th>
