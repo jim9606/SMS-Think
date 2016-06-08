@@ -4,13 +4,19 @@
 	<meta charset="UTF-8">
 	<title>Change password</title>
 </head>
+<script>
+function goback(){
+	window.location.assign("__MODULE__/User/utility");
+}
+</script>
 <body>
 <form method="post" action="__URL__/passwd" align="center">
 <table align="center">
 	<tr><th align="left">User</th><td align="left">{$Think.session.user}</td></tr>
 	<tr><th align="left">Type</th><td align="left">{$Think.session.type}</td></tr>
 	<tr><th align="left">New Password</th><td align="left"><input type="password" name="password" /></td></tr>
-	<tr><td align="right" colspan="2"><input type="submit" value="OK"></td></tr>
+	<tr><td colspan="2" align="right"><input type="submit" value="ok">
+	&nbsp;<input type="button" value="return" onclick="goback()"></td></tr>
 	</table>
 </form>
 </body>
