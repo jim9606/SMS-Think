@@ -92,7 +92,8 @@ class CourseModel extends Model {
 		$query=array();
 		if($condition['course_id']) $query['E.course_id']=$condition['course_id'];
 		if($condition['student_id']) $query['E.student_id']=$condition['student_id'];
-		if($condition['class']) $query['class']=$condition['class'];
+		if($condition['class']) $query['S.class']=$condition['class'];
+		//var_dump($query);
 		return $this->table(array('course'=>'C','student'=>'S','enroll'=>'E'))
 		->where(array(
 				'E.course_id = C.course_id',

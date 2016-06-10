@@ -122,16 +122,21 @@ class CourseController extends Controller{
 	public function findByStudentDisplay(){
 		!C('PERMISSION_CONTROL') or session('permissions')['read'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		$form=new CourseModel();
-		if(IS_POST) $condition=$form->authFindByStudent(I('post.'));
+		if(IS_POST){
+			$condition=$form->authFindByStudent(I('post.'));
+			//var_dump($condition);
+		}
 		else if(IS_GET) $condition=$form->authFindByStudent(I('get.'));
 		$query=$form->getCourseAndStudentBy($condition)->buildSql();
 		$res=$form->table($query.'a')->select();
+		//var_dump($res);
 		$avg=$form->table($query.'a')->avg('grades');
 		//var_dump($avg);	
 		
 		$this->assign('list',$res);
 		$this->assign('avg',$avg);
 		$this->display();
+		
 	}
 	public function findCourse(){
 		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
