@@ -57,7 +57,7 @@ name:<input name="name" type="text">
 	<eq name="Think.session.permissions.admin" value="1"><button onclick='edit("{$vo.course_recid}")'>Edit</button></eq>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick='enroll("{$vo.course_id}")'>Enroll</button></eq>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.course_recid}")'>Delete</button></eq>
-	<eq name="Think.session.permissions.score" value="1"><button onclick='score("{$vo.course_id}")'>Score</button></eq>
+	<eq name="vo.allow_score" value="1"><button onclick='score("{$vo.course_id}")'>Score</button></eq>
 	</td>
 	</tr>
 	</volist>

@@ -4,6 +4,7 @@ use Think\Controller;
 use Think\Model;
 use Sms\Model\CourseModel;
 use Sms\Model\StudentModel;
+use Sms\Model\TeacherModel;
 class CourseController extends Controller{
 	public function insert() {
 			IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -65,22 +66,42 @@ class CourseController extends Controller{
 		$form = M('Course');
 		$query = $form->create(I('get.'));
 		$res = $form->where($query)->select();		
+		
+		if (session('permissions')['score']) {
+			$allowed_courses = $form->where(array('teacher_id'=>session('user')))->field('course_id')->select();
+			$allowed_courses = array_column($allowed_courses,'course_id');
+			foreach ($res as &$course) {
+				if (in_array($course['course_id'],$allowed_courses))
+					$course['allow_score'] = true;
+				else
+					$course['allow_score'] = false;
+			}
+		}
+		//var_dump($res);
 		$this->assign('list',$res);
 		$this->display();
 	}
 	public function score(){
 		!C('PERMISSION_CONTROL') or session('permissions')['score'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		//use course_id to find the course
-		$form = new CourseModel();
 		if(IS_GET){
+			$form = new CourseModel();
 			$res = $form->getCourseAndStudentBy(array('course_id'=>I('get.course_id')))->select();
 			$this->assign('list',$res);
-			var_dump($res);
 			$this->display();
 		}
 		else if(IS_POST){
-			//TODO
-			var_dump(I('post.'));
+			$form = new Model();
+			$data = I('post.')['score'];
+			foreach($data as $k=>$val) {
+				if ($val === '') $val = null;
+				//var_dump($key);var_dump($val);
+				//var_dump($form->table('enroll')->where(array('enroll_id'=>$k))->data(array('grades'=>$val))->fetchSql()->save());
+				$res = $form->table('enroll')->where(array('enroll_id'=>$k))->data(array('grades'=>$val))->save();
+				if ($res === false)
+					$this->error($form->getError());
+			}
+			$this->success("Success",'find');
 		}
 	}
 	
