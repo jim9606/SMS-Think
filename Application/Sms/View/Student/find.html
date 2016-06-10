@@ -12,9 +12,9 @@ function show_courses(student_id) {
 	//TODO: Jump to show courses
 	window.location.assign("__MODULE__/Course/findByStudentDisplay?student_id=" + student_id);
 }
-function del(student_recid) {	
+function del(student_id) {	
 	//TODO: Delete a student. It may use AJAX
-	window.location.assign("__URL__/delete?sutdent_recid=" + student_recid);
+	window.location.assign("__URL__/delete?student_id=" + student_id);
 }
 function goback(){
 	window.location.assign("__MODULE__/User/utility");
@@ -43,7 +43,7 @@ name:<input name="name" type="text">
 	<td>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick='edit("{$vo.student_recid}")'>Edit</button></eq>
 	<eq name="Think.session.permissions.read" value="1"><button onclick='show_courses("{$vo.student_id}")'>Courses</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.student_recid}")'>Delete</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.student_id}")'>Delete</button></eq>
 	</td>
 	</tr>
 	</volist>

@@ -46,7 +46,15 @@ class StudentController extends Controller{
 				$this->error($form->getError());
 	}
 	public function delete($student_id) {
-		//TODO: delete a student
+		//IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$form = D('Student');
+		$res = $form->where(array('student_id'=>$student_id))->delete();
+		if($res) {
+			$this->success("Deleted $student_id#");
+		}else
+			//if $res === 0 No update because of no modified values
+			$this->error(($res === 0) ? "Not modified" : $form->getError());
 	}
 	public function add() {
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));

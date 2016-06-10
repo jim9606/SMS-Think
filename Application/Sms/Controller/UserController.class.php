@@ -30,7 +30,7 @@ class UserController extends Controller{
 	public function logout() {
 		session(null);
 		//TODO: jump to login page
-		$this->success('You have logged out');
+		$this->success('You have logged out','auth');
 	}
 	public function passwd(){
 		if (!session('?type') or session('type') === 'anon')
