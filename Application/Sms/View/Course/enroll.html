@@ -8,17 +8,40 @@
 function goback(){
 	window.location.assign("__MODULE__/User/utility");
 }
+function listenRadio(rowObj,checked){
+	var box = rowObj.getElementsByTagName("td")[7].getElementsByTagName("input");
+	box[0].disabled = !checked;
+	console.info(box[0]);
+}
 </script>
 <body>
 <form method="post" action="__URL__/enroll">
-<input type="hidden" name="course_id" value="{$course.course_id}">
-<input type="hidden" name="allowed_year" value="{$course.allowed_year}">
-<input type="hidden" name="cancel_year" value="{$course.cancel_year}">
+<input type="hidden" name="student_id" value="{$studentProfile.student_id}">
+<table align="center">
+<tr>
+	<th>#</th>
+	<th>Course ID</th>
+	<th>Course</th>
+	<th>Credit</th>
+	<th>Teacher ID</th>
+	<th>Teacher</th>
+	<th>Enroll</th>
+</tr>
+<volist name="enrollableCourses" id="vo">
+<tr>
+	<td>{$i}</td>
+	<td>{$vo.course_id}</td>
+	<td>{$vo.course_name}</td>
+	<td>{$vo.credit}</td>
+	<td>{$vo.teacher_id}</td>
+	<td>{$vo.teacher_name}</td>
+	<td><input type="radio" name="course_id" value="{$vo.course_id}" onchange="listenRadio(this.parentNode.parentNode,this.checked)"/></td>
+	<td><input type="number" name="enroll_year" min="{$vo.enroll_year_lb}" max="{$vo.enroll_year_ub}" placeholder="{$vo.enroll_year_lb}~{$vo.enroll_year_ub}" disabled="disabled"/></td>
+</tr>
+</volist>
+</table>
 <table align="center">
 <tr><td colspan="2" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
-<tr><th align="left">Course:</th><td>{$course.name}</td></tr>
-<tr><th align="left">Student id:</th><td><input type="text" name="student_id" placeholder="Must be 10 digits" pattern="\d{10}" required="required"></td></tr>
-<tr><th align="left">Enroll year:</th><td><input type="text" name="enroll_year"></td></tr>
 <tr><td colspan="2" align="right"><input type="submit" value="enroll"></td></tr>
 </table>
 </form>

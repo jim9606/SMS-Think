@@ -60,11 +60,13 @@ class CourseModel extends Model {
 	 * enroll_year_LB,enroll_year_UB
 	 */
 	public function getEnrollableByStudentId($student_id) {
+		//Uncomm
 		return $this->table(array('course'=>'C','student'=>'S','teacher'=>'T'))
 		->where(array(
 				'C.allowed_year <= S.entrance_year',
 				'S.entrance_year <= C.cancel_year',
-				'C.teacher_id = T.teacher_id'))
+				'C.teacher_id = T.teacher_id'
+		))
 		->where(array('S.student_id'=>$student_id))
 		->field(array(
 				'S.student_id',
@@ -75,8 +77,8 @@ class CourseModel extends Model {
 				'C.credit',
 				'C.teacher_id',
 				'T.name'=>'teacher_name',
-				'S.entrance_year'=>'enroll_year_LB',
-				'C.cancel_year'=>'enroll_year_UB'
+				'S.entrance_year'=>'enroll_year_lb',
+				'C.cancel_year'=>'enroll_year_ub'
 		))
 		->select();
 	}

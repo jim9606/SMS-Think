@@ -22,6 +22,13 @@ class TestController extends Controller {
 	}
 	public function fetchSql($student_id) {
 		$form = new CourseModel();
+		$sub1 = $form->table(array('course'=>'C','enroll'=>'E'))
+		->where(array(
+				'C.course_id = E.course_id',
+				'E.student_id'=>array('NEQ',$student_id)
+		))
+		->field(array('C.*'))->buildSql();
+		
 		$res = $form->getEnrollableByStudentId($student_id);
 		var_dump($res);
 	}

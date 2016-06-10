@@ -3,6 +3,7 @@ namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
 use Sms\Model\CourseModel;
+use Sms\Model\StudentModel;
 class CourseController extends Controller{
 	public function insert() {
 			IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -81,41 +82,28 @@ class CourseController extends Controller{
 			//TODO
 		}
 	}
-	public function enroll(){
-		//TODO: Totally rewrite this
+	
+	public function enroll() {
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-		if(IS_GET){
-			$form=new Model();
-			$course=$form->table('course')->getByCourse_id(I('get.course_id'));
-			$this->assign('course',$course);
+		
+		$Cmodel = new CourseModel();
+		if(IS_GET) {
+			if (I('get.student_id',null) === null)
+				$this->error('Student ID expected');
+			$Smodel = new StudentModel();
+			$profile = $Smodel->getByStudent_id(I('get.student_id'));
+			$enrollable = $Cmodel->getEnrollableByStudentId(I('get.student_id'));
+			//var_dump($profile);
+			var_dump($enrollable);
+			$this->assign('studentProfile',$profile);
+			$this->assign('enrollableCourses',$enrollable);
 			$this->display();
 		}
-		else if(IS_POST){
-			$form=D('Student');
-			$query['student_id']=I('post.student_id');
-			$student=$form->where($query)->find();
-			$grade=date('Y')-$student['entrance_year'];
-			if(I('post.allowed_grade')<=$grade&&I('post.cancel_grade')>$grade){
-				$enroll=M('enroll');//may change to the D method and add the model
-				$data = $enroll->create(array(
-						'course_id'=>I('post.course_id'),
-						'enroll_year'=>I('post.enroll_year'),
-						'student_id'=>I('post.student_id')						
-				));
-				if($data){
-					$res=$enroll->add();
-					if($res) {
-						$this->success("New record $res#");
-					}
-					else
-						$this->error($form->getError());
-					}
-					else
-						$this->error($form->getError());				
-			}
-			else $this->error("Your grade is not allowed to enroll this course.");
+		else if (IS_POST) {
+			$enrollable = $Cmodel->getEnrollableByStudentId(I('get.student_id'));
 		}
 	}
+	
 	/**
 	 *show but cannot change the search results
 	 */
