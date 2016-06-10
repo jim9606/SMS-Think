@@ -71,15 +71,16 @@ class CourseController extends Controller{
 	public function score(){
 		!C('PERMISSION_CONTROL') or session('permissions')['score'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		//use course_id to find the course
+		$form = new CourseModel();
 		if(IS_GET){
-			$form=new Model();
-			$query['course_id']=I('get.course_id');
-			$res = $form->table('enroll')->where($query)->select();
+			$res = $form->getCourseAndStudentBy(array('course_id'=>I('get.course_id')))->select();
 			$this->assign('list',$res);
+			var_dump($res);
 			$this->display();
 		}
 		else if(IS_POST){
 			//TODO
+			var_dump(I('post.'));
 		}
 	}
 	

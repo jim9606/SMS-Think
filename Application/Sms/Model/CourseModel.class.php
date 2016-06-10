@@ -1,7 +1,6 @@
 <?php
 namespace Sms\Model;
 use Think\Model;
-use Think\Template\Driver\Mobile;
 class CourseModel extends Model {
 	protected $insertFields = 'course_id,name,teacher_id,credit,allowed_year,cancel_year';
 	protected $updateFields = 'course_recid,name,teacher_id,credit,allowed_year,cancel_year';
@@ -57,6 +56,8 @@ class CourseModel extends Model {
 		else
 			return true;
 	}
+	
+
 
 	/**
 	 * Validate course
@@ -122,7 +123,9 @@ class CourseModel extends Model {
 		->field(array(
 				'S.name'=>'student_name',
 				'C.name'=>'course_name',
+				'E.enroll_id',
 				'E.student_id',
+				'E.enroll_year',
 				'E.course_id',
 				'E.grades'
 		));
