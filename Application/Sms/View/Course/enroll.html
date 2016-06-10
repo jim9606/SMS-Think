@@ -9,9 +9,8 @@ function goback(){
 	window.location.assign("__MODULE__/User/utility");
 }
 function listenRadio(rowObj,checked){
-	var box = rowObj.getElementsByTagName("td")[7].getElementsByTagName("input");
-	box[0].disabled = !checked;
-	console.info(box[0]);
+	//var box = rowObj.getElementsByTagName("td")[7].getElementsByTagName("input");
+	//box[0].disabled = !checked;
 }
 </script>
 <body>
@@ -25,6 +24,7 @@ function listenRadio(rowObj,checked){
 	<th>Credit</th>
 	<th>Teacher ID</th>
 	<th>Teacher</th>
+	<th>Year</th>
 	<th>Enroll</th>
 </tr>
 <volist name="enrollableCourses" id="vo">
@@ -35,14 +35,17 @@ function listenRadio(rowObj,checked){
 	<td>{$vo.credit}</td>
 	<td>{$vo.teacher_id}</td>
 	<td>{$vo.teacher_name}</td>
-	<td><input type="radio" name="course_id" value="{$vo.course_id}" onchange="listenRadio(this.parentNode.parentNode,this.checked)"/></td>
-	<td><input type="number" name="enroll_year" min="{$vo.enroll_year_lb}" max="{$vo.enroll_year_ub}" placeholder="{$vo.enroll_year_lb}~{$vo.enroll_year_ub}" disabled="disabled"/></td>
+	<td>{$vo.enroll_year_lb}~{$vo.enroll_year_ub}</td>
+	<td><input type="radio" name="course_id" value="{$vo.course_id}" onchange="listenRadio(this.parentNode.parentNode,this.checked)" onchange="listenRadio(this.parentNode.parentNode,this.checked)"/></td>
 </tr>
 </volist>
 </table>
 <table align="center">
+<tr><td colspan="2" align="right">
+<input type="number" name="enroll_year" />
+<input type="submit" value="enroll">
+</td></tr>
 <tr><td colspan="2" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
-<tr><td colspan="2" align="right"><input type="submit" value="enroll"></td></tr>
 </table>
 </form>
 

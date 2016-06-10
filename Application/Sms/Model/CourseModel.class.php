@@ -1,6 +1,7 @@
 <?php
 namespace Sms\Model;
 use Think\Model;
+use Think\Template\Driver\Mobile;
 class CourseModel extends Model {
 	protected $insertFields = 'course_id,name,teacher_id,credit,allowed_year,cancel_year';
 	protected $updateFields = 'course_recid,name,teacher_id,credit,allowed_year,cancel_year';
@@ -38,6 +39,24 @@ class CourseModel extends Model {
 		return ($year) ? $year : 2999;
 	}
 	
+	public function validateAndInsertEnroll($data) {
+		$form = new Model();
+		$enrollable = $this->getEnrollableByStudentId($data['student_id']);
+		$selected = null;
+		foreach ($enrollable as $row) {
+			if ($data['course_id'] === $row['course_id'] and $row['enroll_year_lb'] <= $data['enroll_year'] and $data['enroll_year'] <= $row['enroll_year_ub']) {
+				$selected = $row;break;
+			}
+		}
+		if ($selected === null)
+			return 'Invalid enrollment';
+		var_dump($form->table('enroll')->fetchSql()->add($data));
+		$res = $form->table('enroll')->add($data);
+		if (!res)
+			return $form->getError();
+		else
+			return true;
+	}
 
 	/**
 	 * Validate course
