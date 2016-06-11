@@ -81,11 +81,11 @@ class CourseModel extends Model {
 	 */
 	public function getEnrollableByStudentId($student_id) {
 		//Uncomm
-		return $this->table(array('course'=>'C','student'=>'S','teacher'=>'T'))
+		$enrollable=$this->table(array('course'=>'C','student'=>'S','teacher'=>'T'))
 		->where(array(
 				'C.allowed_year <= S.entrance_year',
 				'S.entrance_year <= C.cancel_year',
-				'C.teacher_id = T.teacher_id'
+				'C.teacher_id = T.teacher_id',
 		))
 		->where(array('S.student_id'=>$student_id))
 		->field(array(
@@ -101,6 +101,17 @@ class CourseModel extends Model {
 				'C.cancel_year'=>'enroll_year_ub'
 		))
 		->select();
+		
+		$enrolled=$this->table('enroll')->where(array('student_id'=>$student_id))->select();
+		foreach ($enrollable as $enrollable_key=>$enrollable_value){
+			foreach ($enrolled as $enrolled_key=>$enrolled_value){
+				if(in_array($enrollable_value['course_id'],$enrolled_value)){
+					unset($enrollable[$enrollable_key]);
+				}
+			}
+		}
+		//var_dump($enrollable);
+		return $enrollable;
 	}
 	
 	/**

@@ -117,9 +117,11 @@ class CourseController extends Controller{
 			$enrollable = $Cmodel->getEnrollableByStudentId(I('get.student_id'));
 			//var_dump($profile);
 			//var_dump($enrollable);
+			
 			$this->assign('studentProfile',$profile);
 			$this->assign('enrollableCourses',$enrollable);
 			$this->display();
+			
 		}
 		else if (IS_POST) {
 			$res = $Cmodel->validateAndInsertEnroll(I('post.'));
