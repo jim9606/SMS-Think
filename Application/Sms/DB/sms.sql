@@ -3,11 +3,13 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-06-07 20:11:05
+-- Generation Time: 2016-06-11 10:41:46
 -- 服务器版本： 5.6.17
 -- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -40,8 +42,13 @@ CREATE TABLE IF NOT EXISTS `course` (
   PRIMARY KEY (`course_recid`),
   UNIQUE KEY `course_id` (`course_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 插入之前先把表清空（truncate） `course`
+--
+
+TRUNCATE TABLE `course`;
 -- --------------------------------------------------------
 
 --
@@ -56,11 +63,15 @@ CREATE TABLE IF NOT EXISTS `enroll` (
   `enroll_year` smallint(6) NOT NULL,
   `grades` decimal(10,0) DEFAULT NULL,
   PRIMARY KEY (`enroll_id`),
-  UNIQUE KEY `unique_enroll` (`student_id`,`course_id`,`enroll_year`),
   KEY `sutdent_id` (`student_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 插入之前先把表清空（truncate） `enroll`
+--
+
+TRUNCATE TABLE `enroll`;
 -- --------------------------------------------------------
 
 --
@@ -78,8 +89,13 @@ CREATE TABLE IF NOT EXISTS `student` (
   `class` varchar(20) NOT NULL,
   PRIMARY KEY (`student_recid`),
   UNIQUE KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 插入之前先把表清空（truncate） `student`
+--
+
+TRUNCATE TABLE `student`;
 -- --------------------------------------------------------
 
 --
@@ -93,8 +109,13 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`teacher_recid`),
   UNIQUE KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 插入之前先把表清空（truncate） `teacher`
+--
+
+TRUNCATE TABLE `teacher`;
 -- --------------------------------------------------------
 
 --
@@ -108,7 +129,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   `user` varchar(10) NOT NULL,
   `password` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 插入之前先把表清空（truncate） `user`
+--
+
+TRUNCATE TABLE `user`;
+--
+-- 转存表中的数据 `user`
+--
+
+INSERT INTO `user` (`id`, `type`, `user`, `password`) VALUES
+(1, 'admin', 'admin', '123456');
 
 --
 -- 限制导出的表
@@ -126,6 +159,7 @@ ALTER TABLE `course`
 ALTER TABLE `enroll`
   ADD CONSTRAINT `enroll_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `enroll_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `course` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
