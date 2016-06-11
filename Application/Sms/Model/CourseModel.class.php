@@ -106,7 +106,7 @@ class CourseModel extends Model {
 		foreach ($enrollable as $enrollable_key=>$enrollable_value){
 			foreach ($enrolled as $enrolled_key=>$enrolled_value){
 				if(in_array($enrollable_value['course_id'],$enrolled_value)){
-					unset($enrollable[$enrollable_key]);
+					unset($enrollable[$enrollable_key]);break;
 				}
 			}
 		}
