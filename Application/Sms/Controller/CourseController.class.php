@@ -124,10 +124,23 @@ class CourseController extends Controller{
 		else if (IS_POST) {
 			$res = $Cmodel->validateAndInsertEnroll(I('post.'));
 			if ($res === true)
-				$this->redirect('enroll',array('student_id'=>I('post.student_id')),1,'Success');
+				//$this->redirect('enroll',array('student_id'=>I('post.student_id')),1,'Success');
+				$this->success("Success to enroll",U('enroll',array('student_id'=>I('post.student_id'))));
 			else 
 				$this->error($res);
 		}
+	}
+	
+	public function retreat($student_id,$course_id){
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$form = D('Enroll');
+		$condition=array('student_id'=>$student_id,'course_id'=>$course_id);
+		$res = $form->where($condition)->delete();
+		if($res) {
+			$this->success("Retreat successfully");
+		}else
+			//if $res === 0 No update because of no modified values
+			$this->error(($res === 0) ? "Not modified" : $form->getError());
 	}
 	
 	/**
@@ -190,5 +203,17 @@ class CourseController extends Controller{
 			$condition=$form->authFindByClass(I('post.'));
 			
 		}
+	}
+	
+	public function delete($course_id) {
+		//IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$form = D('Course');
+		$res = $form->where(array('course_id'=>$course_id))->delete();
+		if($res) {
+			$this->success("Deleted $course_id#");
+		}else
+			//if $res === 0 No update because of no modified values
+			$this->error(($res === 0) ? "Not modified" : $form->getError());
 	}
 }

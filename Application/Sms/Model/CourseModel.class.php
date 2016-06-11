@@ -49,7 +49,7 @@ class CourseModel extends Model {
 		}
 		if ($selected === null)
 			return 'Invalid enrollment';
-		var_dump($form->table('enroll')->fetchSql()->add($data));
+		//var_dump($form->table('enroll')->fetchSql()->add($data));
 		$res = $form->table('enroll')->add($data);
 		if (!res)
 			return $form->getError();

@@ -8,17 +8,22 @@
 function goback(){
 	window.location.assign("__MODULE__/User/utility");
 }
+function retreat(student_id,course_id){
+	window.location.assign("__URL__/retreat?student_id="+student_id+"&course_id="+course_id);
+}
 </script>
 <body>
 <table align="center" border="1">
-<tr><td colspan="5" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
-<tr><th>Student id</th><th>Student name</th><th>Course id</th><th>Course name</th><th>Score</th></tr>
+<tr><td colspan="6" align="right"><input type="button" value="return" onclick="goback()"></td></tr>
+<tr><th>Student id</th><th>Student name</th><th>Course id</th><th>Course name</th><th>Score</th><th>Action</th></tr>
 <volist name="list" id="vo">
 <tr>
 <td>{$vo.student_id}</td><td>{$vo.student_name}</td><td>{$vo.course_id}</td><td>{$vo.course_name}</td><td>{$vo.grades}</td>
+<td><eq name="Think.session.permissions.admin" value="1">
+<input type="button" value="retreat" onclick='retreat("{$vo.student_id}","{$vo.course_id}")'></eq></td>
 </tr>
 </volist>
-<tr><td>average</td><td colspan="4" align="right">{$avg}</td></tr>
+<tr><td>average</td><td colspan="5" align="right">{$avg}</td></tr>
 </table>
 </body>
 </html>

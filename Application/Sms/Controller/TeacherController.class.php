@@ -75,4 +75,18 @@ public function insert() {
 		}
 		$this->redirect('find',$condition);
 	}
+	
+	public function delete($teacher_id) {
+		//IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
+		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
+		$form = D('Teacher');
+		$res = $form->where(array('teacher_id'=>$teacher_id))->delete();
+		if($res) {
+			$form = D('User');
+			$res = $form->where(array('user'=>$teacher_id))->delete();
+			$this->success("Deleted $teacher_id#");
+		}else
+			//if $res === 0 No update because of no modified values
+			$this->error(($res === 0) ? "Not modified" : $form->getError());
+	}
 }

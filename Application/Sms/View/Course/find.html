@@ -8,13 +8,9 @@ function edit(course_recid) {
 	//console.log(student_recid);
 	window.location.assign("__URL__/edit?course_recid=" + course_recid);
 }
-function enroll(course_id) {
-	//TODO: Jump to show courses
-	window.location.assign("__URL__/enroll?course_id=" + course_id);
-}
-function del(course_recid) {	
+function del(course_id) {	
 	//TODO: Delete a student. It may use AJAX
-	window.location.assign("__URL__/delete?course_recid=" + course_recid);
+	window.location.assign("__URL__/delete?course_id=" + course_id);
 }
 function score(course_id){
 	window.location.assign("__URL__/score?course_id=" + course_id);
@@ -55,8 +51,7 @@ name:<input name="name" type="text">
 	<td>{$vo.teacher_id}</td><td>{$vo.credit}</td><td>{$vo.allowed_year}</td><td>{$vo.cancel_year}</td>
 	<td>
 	<eq name="Think.session.permissions.admin" value="1"><button onclick='edit("{$vo.course_recid}")'>Edit</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick='enroll("{$vo.course_id}")'>Enroll</button></eq>
-	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.course_recid}")'>Delete</button></eq>
+	<eq name="Think.session.permissions.admin" value="1"><button onclick='del("{$vo.course_id}")'>Delete</button></eq>
 	<eq name="vo.allow_score" value="1"><button onclick='score("{$vo.course_id}")'>Score</button></eq>
 	</td>
 	</tr>

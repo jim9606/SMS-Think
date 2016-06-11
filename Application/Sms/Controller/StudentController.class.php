@@ -51,6 +51,8 @@ class StudentController extends Controller{
 		$form = D('Student');
 		$res = $form->where(array('student_id'=>$student_id))->delete();
 		if($res) {
+			$form = D('User');
+			$res = $form->where(array('user'=>$student_id))->delete();
 			$this->success("Deleted $student_id#");
 		}else
 			//if $res === 0 No update because of no modified values
