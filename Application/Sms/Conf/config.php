@@ -11,6 +11,9 @@ return array(
 	'DB_PREFIX'=>'',// 数据库表前缀
 	'DB_CHARSET'=>'utf8',// 数据库字符集
 	
+	'DEFAULT_CONTROLLER'=>'User',
+	'DEFAULT_ACTION'=>'auth',
+	
 	'USER_DEFAULT_PASSWORD'=>'123456',
 	'USER_PERMISSIONS'=> array(
 			'anon'   =>array('read'=>0,'admin'=>0,'score'=>0),
