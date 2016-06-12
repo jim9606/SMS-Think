@@ -23,7 +23,7 @@ return array(
 			'student'=>array('read'=>1,'admin'=>0,'score'=>0),
 	),
 		
-	'PERMISSION_CONTROL'=>false, //True for release,check permissions for API
+	'PERMISSION_CONTROL'=>true, //True for release,check permissions for API
 	
 	'MSG_API_PERMISSION_DENIED'=>'Forbidden',
 	'MSG_API_INVALID_METHOD'=>'Invalid method'
