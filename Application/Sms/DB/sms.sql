@@ -21,8 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `sms`
 --
-CREATE DATABASE IF NOT EXISTS `sms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `sms`;
+CREATE DATABASE IF NOT EXISTS `app_scutjimsms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `app_scutjimsms`;
 
 -- --------------------------------------------------------
 
