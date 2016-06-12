@@ -208,4 +208,11 @@ class CourseController extends Controller{
 			//if $res === 0 No update because of no modified values
 			$this->error(($res === 0) ? "Not modified" : $form->getError());
 	}
+	
+	public function add() {
+		$Tform = new TeacherModel();
+		$res = $Tform->field('teacher_id,name')->select();
+		$this->assign('teacher_list',$res);
+		$this->display();
+	}
 }

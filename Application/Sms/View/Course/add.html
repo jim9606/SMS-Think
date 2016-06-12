@@ -16,8 +16,8 @@ function goback(){
 <tr><th>name</th><td><input type="text" maxlength=20 size=20 name="name"></td></tr>
 <tr><th>teacher id</th>
 <td><select>
-	<volist name="student_id" id="vo">
-	<option value="{$vo.teacher_id}">{$vo.name}  {$vo.teacher_id}</option>
+	<volist name="teacher_list" id="vo">
+	<option value="{$vo.teacher_id}">{$vo.teacher_id}	{$vo.name}</option>
 	</volist>
 </select></td></tr>
 <tr><th>credit</th><td><input type="text" maxlength=20 size=20 name="credit"></td></tr>
