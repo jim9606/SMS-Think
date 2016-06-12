@@ -31,7 +31,6 @@ public function insert() {
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
 		if ($data) {
 			$res = $form->save($data);
-			var_dump($res);
 			if($res) {
 				$this->success("Record updated");
 			}else

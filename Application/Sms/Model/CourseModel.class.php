@@ -49,7 +49,6 @@ class CourseModel extends Model {
 		}
 		if ($selected === null)
 			return 'Invalid enrollment';
-		//var_dump($form->table('enroll')->fetchSql()->add($data));
 		$res = $form->table('enroll')->add($data);
 		if (!res)
 			return $form->getError();
@@ -110,7 +109,6 @@ class CourseModel extends Model {
 				}
 			}
 		}
-		//var_dump($enrollable);
 		return $enrollable;
 	}
 	
@@ -119,12 +117,10 @@ class CourseModel extends Model {
 	 * @return Model SubQuery
 	 */
 	public function getCourseAndStudentBy($condition) {
-		//var_dump($condition);
 		$query=array();
 		if($condition['course_id']) $query['E.course_id']=$condition['course_id'];
 		if($condition['student_id']) $query['E.student_id']=$condition['student_id'];
 		if($condition['class']) $query['S.class']=$condition['class'];
-		//var_dump($query);
 		return $this->table(array('course'=>'C','student'=>'S','enroll'=>'E'))
 		->where(array(
 				'E.course_id = C.course_id',
@@ -166,11 +162,9 @@ class CourseModel extends Model {
 				$condition['course_id']=$data['course_id'];
 			}
 		}
-		//var_dump($condition);
 		return $condition;
 	}
 	public function authFindByTeacher($data){
-		//var_dump($data);
 		$condition=array();
 		//valide the data
 		if(@$data['course_id'] or @$data['course_name']){
