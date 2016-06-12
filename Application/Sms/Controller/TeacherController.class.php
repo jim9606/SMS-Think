@@ -2,6 +2,7 @@
 namespace Sms\Controller;
 use Think\Controller;
 use Think\Model;
+use Sms\Model\TeacherModel;
 class TeacherController extends Controller{
 public function insert() {
 		IS_POST or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -87,5 +88,11 @@ public function insert() {
 		}else
 			//if $res === 0 No update because of no modified values
 			$this->error(($res === 0) ? "Not modified" : $form->getError());
+	}
+	
+	public function add() {
+		$Tform = new TeacherModel();
+		$res = $Tform->field('teacher_id,name')->select();
+		$this->assign('teacher_list',$res);
 	}
 }
