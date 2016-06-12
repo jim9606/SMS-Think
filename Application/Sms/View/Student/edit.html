@@ -12,7 +12,7 @@ function goback(){
 <body>
 	<form method="post" action="__URL__/update">
 		<input type="hidden" name="student_recid" value="{$vo.student_recid}" />
-		<table>
+		<table align="center">
 			<tr><th>student id</th><td>{$vo.student_id}</td></tr>
 			<tr><th>name</th><td><input type="text" value="{$vo.name}" maxlength=20 size=20 name="name" /></td></tr>
 			<tr><th>gender</th><td>
@@ -25,7 +25,7 @@ function goback(){
 			<datalist id="class"><volist name="class_list" id="vo" >
 			<option value="{$vo}" >
 			</volist></datalist></td></tr>
-			<tr><td colspan="2" align="right"><input type="submit" value="ok"><input type="button" value="return" onclick="goback()"></td></tr>
+			<tr><td colspan="2" align="right"><input type="submit" value="ok">&nbsp;<input type="button" value="return" onclick="goback()"></td></tr>
 		</table>
 	</form>
 </body>
