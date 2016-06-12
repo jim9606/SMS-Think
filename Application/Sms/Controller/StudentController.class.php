@@ -61,7 +61,7 @@ class StudentController extends Controller{
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		$form = M('student');
 		$class = $form->field('class')->select();
-		$class = array_column($class,'class');
+		$class = array_unique(array_column($class,'class'));
 		$this->assign('class_list',$class);
 		$this->display();
 	}
@@ -70,7 +70,7 @@ class StudentController extends Controller{
 		$student_recid=I('get.student_recid');
 		$form=D('Student');
 		$class = $form->field('class')->select();
-		$class = array_column($class,'class');
+		$class = array_unique(array_column($class,'class'));
 		$this->assign('class_list',$class);
 		$this->assign('vo',$form->find($student_recid));
 		$this->display();
