@@ -37,7 +37,6 @@ class CourseController extends Controller{
 				$this->error($error2);
 			if ($data) {
 				$res = $form->save($data);
-				var_dump($res);
 				if($res) {
 					$this->success("Record updated");
 				}else
@@ -57,7 +56,6 @@ class CourseController extends Controller{
 		$this->display();
 	}
 	public function find() {
-		//var_dump(I('get.'));
 		//Do not contain any empty values
 		//Invalid keys will be ignored
 		IS_GET or $this->error(C('MSG_API_INVALID_METHOD'));
@@ -77,7 +75,6 @@ class CourseController extends Controller{
 					$course['allow_score'] = false;
 			}
 		}
-		//var_dump($res);
 		$this->assign('list',$res);
 		$this->display();
 	}
@@ -95,8 +92,6 @@ class CourseController extends Controller{
 			$data = I('post.')['score'];
 			foreach($data as $k=>$val) {
 				if ($val === '') $val = null;
-				//var_dump($key);var_dump($val);
-				//var_dump($form->table('enroll')->where(array('enroll_id'=>$k))->data(array('grades'=>$val))->fetchSql()->save());
 				$res = $form->table('enroll')->where(array('enroll_id'=>$k))->data(array('grades'=>$val))->save();
 				if ($res === false)
 					$this->error($form->getError());
@@ -115,8 +110,6 @@ class CourseController extends Controller{
 			$Smodel = new StudentModel();
 			$profile = $Smodel->getByStudent_id(I('get.student_id'));
 			$enrollable = $Cmodel->getEnrollableByStudentId(I('get.student_id'));
-			//var_dump($profile);
-			//var_dump($enrollable);
 			
 			$this->assign('studentProfile',$profile);
 			$this->assign('enrollableCourses',$enrollable);
@@ -165,14 +158,11 @@ class CourseController extends Controller{
 		$form=new CourseModel();
 		if(IS_POST){
 			$condition=$form->authFindByStudent(I('post.'));
-			//var_dump($condition);
 		}
 		else if(IS_GET) $condition=$form->authFindByStudent(I('get.'));
 		$query=$form->getCourseAndStudentBy($condition)->buildSql();
 		$res=$form->table($query.'a')->select();
-		//var_dump($res);
 		$avg=$form->table($query.'a')->avg('grades');
-		//var_dump($avg);	
 		
 		$this->assign('list',$res);
 		$this->assign('avg',$avg);
@@ -217,5 +207,12 @@ class CourseController extends Controller{
 		}else
 			//if $res === 0 No update because of no modified values
 			$this->error(($res === 0) ? "Not modified" : $form->getError());
+	}
+	
+	public function add() {
+		$Tform = new TeacherModel();
+		$res = $Tform->field('teacher_id,name')->select();
+		$this->assign('teacher_list',$res);
+		$this->display();
 	}
 }

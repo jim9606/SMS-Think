@@ -20,7 +20,11 @@ function goback(){
 			</td></tr>
 <tr><th>entrance age</th><td><input type="text" maxlength=20 size=20 name="entrance_age"></td></tr>
 <tr><th>entrance year</th><td><input type="text" maxlength=20 size=20 name="entrance_year"></td></tr>
-<tr><th>class</th><td><input type="text" maxlength=20 size=20 name="class"></td></tr>
+<tr><th>class</th><td><input type="text" maxlength=20 size=20 name="class" list="class">
+<datalist id="class"><volist name="class_list" id="vo" >
+<option value="{$vo}" >
+</volist></datalist>
+</td></tr>
 <tr><td colspan="2" align="right"><input type="submit" value="ok">&nbsp;<input type="button" value="return" onclick="goback()"></td></tr>
 <tr><td>Default password</td><td>"{$Think.config.USER_DEFAULT_PASSWORD}"</td></tr>
 </table>

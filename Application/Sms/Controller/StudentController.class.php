@@ -35,7 +35,6 @@ class StudentController extends Controller{
 		$data = $form->create(I('post.'),Model::MODEL_UPDATE);
 		if ($data) {
 			$res = $form->save($data);
-			//var_dump($res);
 			if($res) {
 				$this->success("Record updated");
 			}else
@@ -60,13 +59,20 @@ class StudentController extends Controller{
 	}
 	public function add() {
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
-		$this->show();
+		$form = M('student');
+		$class = $form->field('class')->select();
+		$class = array_unique(array_column($class,'class'));
+		$this->assign('class_list',$class);
+		$this->display();
 	}
 	public function edit(){
 		!C('PERMISSION_CONTROL') or session('permissions')['admin'] or $this->error(C('MSG_API_PERMISSION_DENIED'));
 		$student_recid=I('get.student_recid');
-		$Form=D('Student');
-		$this->assign('vo',$Form->find($student_recid));
+		$form=D('Student');
+		$class = $form->field('class')->select();
+		$class = array_unique(array_column($class,'class'));
+		$this->assign('class_list',$class);
+		$this->assign('vo',$form->find($student_recid));
 		$this->display();
 	}
 	public function find() {

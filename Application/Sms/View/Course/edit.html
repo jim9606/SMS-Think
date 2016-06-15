@@ -12,14 +12,14 @@ function goback(){
 <body>
 <form method="post" action="__URL__/update">
 <input type="hidden" name="course_recid" value="{$vo.course_recid}" />
-<table>
+<table align="center">
 <tr><th>Course ID</th><td>{$vo.course_id}</td></tr>
 <tr><th>name</th><td><input type="text" value="{$vo.name}" maxlength=20 size=20 name="name"></td></tr>
 <tr><th>teacher id</th><td><input type="text" value="{$vo.teacher_id}" maxlength=20 size=20 name="teacher_id"></td></tr>
 <tr><th>credit</th><td><input type="text" value="{$vo.credit}" maxlength=20 size=20 name="credit"></td></tr>
 <tr><th>Allowed Year</th><td><input type="text" value="{$vo.allowed_year}" maxlength=20 size=20 name="allowed_year"></td></tr>
 <tr><th>Cancel Year</th><td><input type="text" value="{$vo.cancel_year}" maxlength=20 size=20 name="cancel_year"></td></tr>
-<tr><td colspan="2" align="right"><input type="submit" value="ok"><input type="button" value="return" onclick="goback()"></td></tr>
+<tr><td colspan="2" align="right"><input type="submit" value="ok">&nbsp;<input type="button" value="return" onclick="goback()"></td></tr>
 </table>
 </form>
 </body>
